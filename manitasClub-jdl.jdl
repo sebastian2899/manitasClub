@@ -1,0 +1,100 @@
+enum TipoIdentificacion {
+    CC, CE
+}
+
+enum EstadoMembresia{
+	VENCIDA, ACTIVA, CANCELADA
+}
+
+enum EstadoCaja{
+	DEUDA, SALDADA
+}
+
+entity Ninio {
+	nombres String
+    apellidos String
+    doucumentoIdentidad String
+    fechaNacimiento Instant
+    edad Long
+    observacion Boolean
+    descripcionObservacion String
+    foto ImageBlob
+}
+
+entity Acudiente {
+	nombre String
+    apellido String
+    tipoIdentifiacacion TipoIdentificacion
+    direccion String
+    telefono String
+    email String
+    parentesco String
+}
+
+entity TipoMembresia{
+	nombreMembresia String
+    valorMembresia BigDecimal
+    descripcion String
+
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Membresia {
+    fechaCreacion Instant
+	fechaInicio Instant
+	fechaFin Instant
+	cantidad Long
+    estado EstadoMembresia
+    descripcion String
+}
+
+entity RegistroDiario {
+	nombreNinio String
+    nombreAcudiente String
+    telefonoAcudiente String
+    valor BigDecimal
+    fechaIngreso Instant
+    horaEntrada String
+    horaSalida	String
+}
+
+entity Caja {
+  fechaCreacion Instant
+  valorDia BigDecimal
+  valorRegistrado BigDecimal
+  diferencia BigDecimal
+  estado EstadoCaja
+}
+
+entity Gastos {
+ fechaCreacion Instant
+ valor BigDecimal
+ descripcion String
+}
+         
+entity TotalGastos {
+ fechaCreacion Instant
+ valorInicial BigDecimal
+ valorTotalGastos BigDecimal
+ diferencia BigDecimal
+ estado EstadoCaja
+}
+
+relationship OneToOne {
+	Ninio{acudiente} to Acudiente
+    Membresia{tipo} to TipoMembresia
+    Membresia{ninio} to Ninio
+}
+
+
+
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,28 @@
+{
+  "manitasclubApp": {
+    "totalGastos": {
+      "home": {
+        "title": "Total Gastos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Total Gastos",
+        "createOrEditLabel": "Crear o editar Total Gastos",
+        "notFound": "Ningún Total Gastos encontrado"
+      },
+      "created": "Un nuevo Total Gastos ha sido creado con el identificador {{ param }}",
+      "updated": "Un Total Gastos ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Total Gastos ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Total Gastos {{ id }}?"
+      },
+      "detail": {
+        "title": "Total Gastos"
+      },
+      "id": "ID",
+      "fechaCreacion": "Fecha Creacion",
+      "valorInicial": "Valor Inicial",
+      "valorTotalGastos": "Valor Total Gastos",
+      "diferencia": "Diferencia",
+      "estado": "Estado"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20220704230818",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tipo_membresia",
+  "fields": [
+    {
+      "fieldName": "nombreMembresia",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valorMembresia",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TipoMembresia",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

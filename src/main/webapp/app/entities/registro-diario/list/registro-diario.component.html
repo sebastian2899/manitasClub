@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="RegistroDiarioHeading">
+    <span jhiTranslate="manitasclubApp.registroDiario.home.title">Registro Diarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manitasclubApp.registroDiario.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-registro-diario"
+        [routerLink]="['/registro-diario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manitasclubApp.registroDiario.home.createLabel"> Create a new Registro Diario </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="registroDiarios?.length === 0">
+    <span jhiTranslate="manitasclubApp.registroDiario.home.notFound">No registroDiarios found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="registroDiarios && registroDiarios.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.nombreNinio">Nombre Ninio</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.nombreAcudiente">Nombre Acudiente</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.telefonoAcudiente">Telefono Acudiente</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.valor">Valor</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.fechaIngreso">Fecha Ingreso</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.horaEntrada">Hora Entrada</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.registroDiario.horaSalida">Hora Salida</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let registroDiario of registroDiarios; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/registro-diario', registroDiario.id, 'view']">{{ registroDiario.id }}</a>
+          </td>
+          <td>{{ registroDiario.nombreNinio }}</td>
+          <td>{{ registroDiario.nombreAcudiente }}</td>
+          <td>{{ registroDiario.telefonoAcudiente }}</td>
+          <td>{{ registroDiario.valor }}</td>
+          <td>{{ registroDiario.fechaIngreso | formatMediumDatetime }}</td>
+          <td>{{ registroDiario.horaEntrada }}</td>
+          <td>{{ registroDiario.horaSalida }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/registro-diario', registroDiario.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/registro-diario', registroDiario.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(registroDiario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

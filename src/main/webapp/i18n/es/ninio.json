@@ -1,0 +1,32 @@
+{
+  "manitasclubApp": {
+    "ninio": {
+      "home": {
+        "title": "Ninios",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Ninio",
+        "createOrEditLabel": "Crear o editar Ninio",
+        "notFound": "Ningún Ninios encontrado"
+      },
+      "created": "Un nuevo Ninio ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ninio ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ninio ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ninio {{ id }}?"
+      },
+      "detail": {
+        "title": "Ninio"
+      },
+      "id": "ID",
+      "nombres": "Nombres",
+      "apellidos": "Apellidos",
+      "doucumentoIdentidad": "Doucumento Identidad",
+      "fechaNacimiento": "Fecha Nacimiento",
+      "edad": "Edad",
+      "observacion": "Observacion",
+      "descripcionObservacion": "Descripcion Observacion",
+      "foto": "Foto",
+      "acudiente": "Acudiente"
+    }
+  }
+}

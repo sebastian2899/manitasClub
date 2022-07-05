@@ -1,0 +1,9 @@
+{
+  "manitasclubApp": {
+    "EstadoCaja": {
+      "null": "",
+      "DEUDA": "DEUDA",
+      "SALDADA": "SALDADA"
+    }
+  }
+}

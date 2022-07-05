@@ -1,0 +1,26 @@
+{
+  "manitasclubApp": {
+    "gastos": {
+      "home": {
+        "title": "Gastos",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Gastos",
+        "createOrEditLabel": "Crear o editar Gastos",
+        "notFound": "Ningún Gastos encontrado"
+      },
+      "created": "Un nuevo Gastos ha sido creado con el identificador {{ param }}",
+      "updated": "Un Gastos ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Gastos ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Gastos {{ id }}?"
+      },
+      "detail": {
+        "title": "Gastos"
+      },
+      "id": "ID",
+      "fechaCreacion": "Fecha Creacion",
+      "valor": "Valor",
+      "descripcion": "Descripcion"
+    }
+  }
+}

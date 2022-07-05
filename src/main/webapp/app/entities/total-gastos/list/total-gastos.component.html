@@ -1,0 +1,86 @@
+<div>
+  <h2 id="page-heading" data-cy="TotalGastosHeading">
+    <span jhiTranslate="manitasclubApp.totalGastos.home.title">Total Gastos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="manitasclubApp.totalGastos.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-total-gastos"
+        [routerLink]="['/total-gastos/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="manitasclubApp.totalGastos.home.createLabel"> Create a new Total Gastos </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="totalGastos?.length === 0">
+    <span jhiTranslate="manitasclubApp.totalGastos.home.notFound">No totalGastos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="totalGastos && totalGastos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.totalGastos.fechaCreacion">Fecha Creacion</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.totalGastos.valorInicial">Valor Inicial</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.totalGastos.valorTotalGastos">Valor Total Gastos</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.totalGastos.diferencia">Diferencia</span></th>
+          <th scope="col"><span jhiTranslate="manitasclubApp.totalGastos.estado">Estado</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let totalGastos of totalGastos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/total-gastos', totalGastos.id, 'view']">{{ totalGastos.id }}</a>
+          </td>
+          <td>{{ totalGastos.fechaCreacion | formatMediumDatetime }}</td>
+          <td>{{ totalGastos.valorInicial }}</td>
+          <td>{{ totalGastos.valorTotalGastos }}</td>
+          <td>{{ totalGastos.diferencia }}</td>
+          <td jhiTranslate="{{ 'manitasclubApp.EstadoCaja.' + totalGastos.estado }}">{{ totalGastos.estado }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/total-gastos', totalGastos.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/total-gastos', totalGastos.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(totalGastos)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

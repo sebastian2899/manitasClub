@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20220704230819",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "membresia",
+  "fields": [
+    {
+      "fieldName": "fechaCreacion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaInicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaFin",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "cantidad",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "EstadoMembresia",
+      "fieldValues": "VENCIDA,ACTIVA,CANCELADA"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "not an ignored comment",
+  "jpaMetamodelFiltering": false,
+  "name": "Membresia",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "tipoMembresia",
+      "otherEntityRelationshipName": "membresia",
+      "ownerSide": true,
+      "relationshipName": "tipo",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "ninio",
+      "otherEntityRelationshipName": "membresia",
+      "ownerSide": true,
+      "relationshipName": "ninio",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

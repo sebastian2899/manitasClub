@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ninio">
+      <h2 data-cy="ninioDetailsHeading"><span jhiTranslate="manitasclubApp.ninio.detail.title">Ninio</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ninio.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.nombres">Nombres</span></dt>
+        <dd>
+          <span>{{ ninio.nombres }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.apellidos">Apellidos</span></dt>
+        <dd>
+          <span>{{ ninio.apellidos }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.doucumentoIdentidad">Doucumento Identidad</span></dt>
+        <dd>
+          <span>{{ ninio.doucumentoIdentidad }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.fechaNacimiento">Fecha Nacimiento</span></dt>
+        <dd>
+          <span>{{ ninio.fechaNacimiento | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.edad">Edad</span></dt>
+        <dd>
+          <span>{{ ninio.edad }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.observacion">Observacion</span></dt>
+        <dd>
+          <span>{{ ninio.observacion }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.descripcionObservacion">Descripcion Observacion</span></dt>
+        <dd>
+          <span>{{ ninio.descripcionObservacion }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.foto">Foto</span></dt>
+        <dd>
+          <div *ngIf="ninio.foto">
+            <a (click)="openFile(ninio.foto, ninio.fotoContentType)">
+              <img [src]="'data:' + ninio.fotoContentType + ';base64,' + ninio.foto" style="max-width: 100%" alt="ninio image" />
+            </a>
+            {{ ninio.fotoContentType }}, {{ byteSize(ninio.foto) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.ninio.acudiente">Acudiente</span></dt>
+        <dd>
+          <div *ngIf="ninio.acudiente">
+            <a [routerLink]="['/acudiente', ninio.acudiente?.id, 'view']">{{ ninio.acudiente?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ninio', ninio.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

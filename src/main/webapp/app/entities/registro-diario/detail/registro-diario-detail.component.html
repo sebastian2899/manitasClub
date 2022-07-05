@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="registroDiario">
+      <h2 data-cy="registroDiarioDetailsHeading"><span jhiTranslate="manitasclubApp.registroDiario.detail.title">Registro Diario</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ registroDiario.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.nombreNinio">Nombre Ninio</span></dt>
+        <dd>
+          <span>{{ registroDiario.nombreNinio }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.nombreAcudiente">Nombre Acudiente</span></dt>
+        <dd>
+          <span>{{ registroDiario.nombreAcudiente }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.telefonoAcudiente">Telefono Acudiente</span></dt>
+        <dd>
+          <span>{{ registroDiario.telefonoAcudiente }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.valor">Valor</span></dt>
+        <dd>
+          <span>{{ registroDiario.valor }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.fechaIngreso">Fecha Ingreso</span></dt>
+        <dd>
+          <span>{{ registroDiario.fechaIngreso | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.horaEntrada">Hora Entrada</span></dt>
+        <dd>
+          <span>{{ registroDiario.horaEntrada }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.registroDiario.horaSalida">Hora Salida</span></dt>
+        <dd>
+          <span>{{ registroDiario.horaSalida }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/registro-diario', registroDiario.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

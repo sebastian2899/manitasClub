@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="caja">
+      <h2 data-cy="cajaDetailsHeading"><span jhiTranslate="manitasclubApp.caja.detail.title">Caja</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ caja.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.caja.fechaCreacion">Fecha Creacion</span></dt>
+        <dd>
+          <span>{{ caja.fechaCreacion | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.caja.valorDia">Valor Dia</span></dt>
+        <dd>
+          <span>{{ caja.valorDia }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.caja.valorRegistrado">Valor Registrado</span></dt>
+        <dd>
+          <span>{{ caja.valorRegistrado }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.caja.diferencia">Diferencia</span></dt>
+        <dd>
+          <span>{{ caja.diferencia }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.caja.estado">Estado</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manitasclubApp.EstadoCaja.' + caja.estado }}">{{ caja.estado }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/caja', caja.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

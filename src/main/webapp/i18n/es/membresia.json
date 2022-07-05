@@ -1,0 +1,31 @@
+{
+  "manitasclubApp": {
+    "membresia": {
+      "home": {
+        "title": "Membresias",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Membresia",
+        "createOrEditLabel": "Crear o editar Membresia",
+        "notFound": "Ningún Membresias encontrado"
+      },
+      "created": "Un nuevo Membresia ha sido creado con el identificador {{ param }}",
+      "updated": "Un Membresia ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Membresia ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Membresia {{ id }}?"
+      },
+      "detail": {
+        "title": "Membresia"
+      },
+      "id": "ID",
+      "fechaCreacion": "Fecha Creacion",
+      "fechaInicio": "Fecha Inicio",
+      "fechaFin": "Fecha Fin",
+      "cantidad": "Cantidad",
+      "estado": "Estado",
+      "descripcion": "Descripcion",
+      "tipo": "Tipo",
+      "ninio": "Ninio"
+    }
+  }
+}

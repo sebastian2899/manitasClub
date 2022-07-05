@@ -1,0 +1,10 @@
+{
+  "manitasclubApp": {
+    "EstadoMembresia": {
+      "null": "",
+      "VENCIDA": "VENCIDA",
+      "ACTIVA": "ACTIVA",
+      "CANCELADA": "CANCELADA"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "manitasclubApp": {
+    "tipoMembresia": {
+      "home": {
+        "title": "Tipo Membresias",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Tipo Membresia",
+        "createOrEditLabel": "Crear o editar Tipo Membresia",
+        "notFound": "Ningún Tipo Membresias encontrado"
+      },
+      "created": "Un nuevo Tipo Membresia ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tipo Membresia ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tipo Membresia ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tipo Membresia {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Membresia"
+      },
+      "id": "ID",
+      "nombreMembresia": "Nombre Membresia",
+      "valorMembresia": "Valor Membresia",
+      "descripcion": "Descripcion"
+    }
+  }
+}

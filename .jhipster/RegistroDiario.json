@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20220704230820",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "registro_diario",
+  "fields": [
+    {
+      "fieldName": "nombreNinio",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombreAcudiente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "telefonoAcudiente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valor",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "fechaIngreso",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "horaEntrada",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "horaSalida",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "RegistroDiario",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

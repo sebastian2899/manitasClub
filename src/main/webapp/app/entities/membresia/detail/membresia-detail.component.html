@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="membresia">
+      <h2 data-cy="membresiaDetailsHeading"><span jhiTranslate="manitasclubApp.membresia.detail.title">Membresia</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ membresia.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.fechaCreacion">Fecha Creacion</span></dt>
+        <dd>
+          <span>{{ membresia.fechaCreacion | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.fechaInicio">Fecha Inicio</span></dt>
+        <dd>
+          <span>{{ membresia.fechaInicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.fechaFin">Fecha Fin</span></dt>
+        <dd>
+          <span>{{ membresia.fechaFin | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.cantidad">Cantidad</span></dt>
+        <dd>
+          <span>{{ membresia.cantidad }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.estado">Estado</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manitasclubApp.EstadoMembresia.' + membresia.estado }}">{{ membresia.estado }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.descripcion">Descripcion</span></dt>
+        <dd>
+          <span>{{ membresia.descripcion }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.tipo">Tipo</span></dt>
+        <dd>
+          <div *ngIf="membresia.tipo">
+            <a [routerLink]="['/tipo-membresia', membresia.tipo?.id, 'view']">{{ membresia.tipo?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.membresia.ninio">Ninio</span></dt>
+        <dd>
+          <div *ngIf="membresia.ninio">
+            <a [routerLink]="['/ninio', membresia.ninio?.id, 'view']">{{ membresia.ninio?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/membresia', membresia.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+package com.manitasclub.app.service.dto;
+
+import com.manitasclub.app.domain.enumeration.EstadoMembresia;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.Objects;
+
+/**
+ * A DTO for the {@link com.manitasclub.app.domain.Membresia} entity.
+ */
+@Schema(description = "not an ignored comment")
+public class MembresiaDTO implements Serializable {
+
+    private Long id;
+
+    private Instant fechaCreacion;
+
+    private Instant fechaInicio;
+
+    private Instant fechaFin;
+
+    private Long cantidad;
+
+    private EstadoMembresia estado;
+
+    private String descripcion;
+
+    private TipoMembresiaDTO tipo;
+
+    private NinioDTO ninio;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Instant getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Instant fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Instant getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Instant fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Instant getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Instant fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Long getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Long cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public EstadoMembresia getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoMembresia estado) {
+        this.estado = estado;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public TipoMembresiaDTO getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoMembresiaDTO tipo) {
+        this.tipo = tipo;
+    }
+
+    public NinioDTO getNinio() {
+        return ninio;
+    }
+
+    public void setNinio(NinioDTO ninio) {
+        this.ninio = ninio;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MembresiaDTO)) {
+            return false;
+        }
+
+        MembresiaDTO membresiaDTO = (MembresiaDTO) o;
+        if (this.id == null) {
+            return false;
+        }
+        return Objects.equals(this.id, membresiaDTO.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id);
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "MembresiaDTO{" +
+            "id=" + getId() +
+            ", fechaCreacion='" + getFechaCreacion() + "'" +
+            ", fechaInicio='" + getFechaInicio() + "'" +
+            ", fechaFin='" + getFechaFin() + "'" +
+            ", cantidad=" + getCantidad() +
+            ", estado='" + getEstado() + "'" +
+            ", descripcion='" + getDescripcion() + "'" +
+            ", tipo=" + getTipo() +
+            ", ninio=" + getNinio() +
+            "}";
+    }
+}

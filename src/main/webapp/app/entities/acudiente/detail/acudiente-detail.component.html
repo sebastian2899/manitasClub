@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="acudiente">
+      <h2 data-cy="acudienteDetailsHeading"><span jhiTranslate="manitasclubApp.acudiente.detail.title">Acudiente</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ acudiente.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.nombre">Nombre</span></dt>
+        <dd>
+          <span>{{ acudiente.nombre }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.apellido">Apellido</span></dt>
+        <dd>
+          <span>{{ acudiente.apellido }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.tipoIdentifiacacion">Tipo Identifiacacion</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'manitasclubApp.TipoIdentificacion.' + acudiente.tipoIdentifiacacion }}">{{
+            acudiente.tipoIdentifiacacion
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.direccion">Direccion</span></dt>
+        <dd>
+          <span>{{ acudiente.direccion }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.telefono">Telefono</span></dt>
+        <dd>
+          <span>{{ acudiente.telefono }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.email">Email</span></dt>
+        <dd>
+          <span>{{ acudiente.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="manitasclubApp.acudiente.parentesco">Parentesco</span></dt>
+        <dd>
+          <span>{{ acudiente.parentesco }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/acudiente', acudiente.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

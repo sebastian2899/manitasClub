@@ -1,0 +1,30 @@
+{
+  "manitasclubApp": {
+    "registroDiario": {
+      "home": {
+        "title": "Registro Diarios",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Registro Diario",
+        "createOrEditLabel": "Crear o editar Registro Diario",
+        "notFound": "Ningún Registro Diarios encontrado"
+      },
+      "created": "Un nuevo Registro Diario ha sido creado con el identificador {{ param }}",
+      "updated": "Un Registro Diario ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Registro Diario ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Registro Diario {{ id }}?"
+      },
+      "detail": {
+        "title": "Registro Diario"
+      },
+      "id": "ID",
+      "nombreNinio": "Nombre Ninio",
+      "nombreAcudiente": "Nombre Acudiente",
+      "telefonoAcudiente": "Telefono Acudiente",
+      "valor": "Valor",
+      "fechaIngreso": "Fecha Ingreso",
+      "horaEntrada": "Hora Entrada",
+      "horaSalida": "Hora Salida"
+    }
+  }
+}

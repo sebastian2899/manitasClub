@@ -1,0 +1,30 @@
+{
+  "manitasclubApp": {
+    "acudiente": {
+      "home": {
+        "title": "Acudientes",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Acudiente",
+        "createOrEditLabel": "Crear o editar Acudiente",
+        "notFound": "Ningún Acudientes encontrado"
+      },
+      "created": "Un nuevo Acudiente ha sido creado con el identificador {{ param }}",
+      "updated": "Un Acudiente ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Acudiente ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Acudiente {{ id }}?"
+      },
+      "detail": {
+        "title": "Acudiente"
+      },
+      "id": "ID",
+      "nombre": "Nombre",
+      "apellido": "Apellido",
+      "tipoIdentifiacacion": "Tipo Identifiacacion",
+      "direccion": "Direccion",
+      "telefono": "Telefono",
+      "email": "Email",
+      "parentesco": "Parentesco"
+    }
+  }
+}

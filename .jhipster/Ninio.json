@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20220704230816",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "ninio",
+  "fields": [
+    {
+      "fieldName": "nombres",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apellidos",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "doucumentoIdentidad",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fechaNacimiento",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "edad",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "observacion",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "descripcionObservacion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "foto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ninio",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "acudiente",
+      "otherEntityRelationshipName": "ninio",
+      "ownerSide": true,
+      "relationshipName": "acudiente",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
