@@ -5,9 +5,10 @@ import { NinioDetailComponent } from './detail/ninio-detail.component';
 import { NinioUpdateComponent } from './update/ninio-update.component';
 import { NinioDeleteDialogComponent } from './delete/ninio-delete-dialog.component';
 import { NinioRoutingModule } from './route/ninio-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  imports: [SharedModule, NinioRoutingModule],
+  imports: [SharedModule, NinioRoutingModule, MatIconModule],
   declarations: [NinioComponent, NinioDetailComponent, NinioUpdateComponent, NinioDeleteDialogComponent],
   entryComponents: [NinioDeleteDialogComponent],
 })
