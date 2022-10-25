@@ -1,6 +1,7 @@
 package com.manitasclub.app.service;
 
 import com.manitasclub.app.service.dto.RegistroDiarioDTO;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,4 +54,6 @@ public interface RegistroDiarioService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    BigDecimal valorPorMeses(String fechaInicio, String fechaFin);
 }

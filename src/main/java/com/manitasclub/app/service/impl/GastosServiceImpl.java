@@ -5,10 +5,14 @@ import com.manitasclub.app.repository.GastosRepository;
 import com.manitasclub.app.service.GastosService;
 import com.manitasclub.app.service.dto.GastosDTO;
 import com.manitasclub.app.service.mapper.GastosMapper;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,9 @@ public class GastosServiceImpl implements GastosService {
     private final GastosRepository gastosRepository;
 
     private final GastosMapper gastosMapper;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public GastosServiceImpl(GastosRepository gastosRepository, GastosMapper gastosMapper) {
         this.gastosRepository = gastosRepository;
@@ -61,6 +68,30 @@ public class GastosServiceImpl implements GastosService {
             })
             .map(gastosRepository::save)
             .map(gastosMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public BigDecimal valorPorMeses(String fechaInicio, String fechaFin) {
+        log.debug("find value per months");
+
+        String fechaInicioFormat = fechaInicio.substring(0, 10);
+        String fechaFinFormat = fechaFin.substring(0, 10);
+
+        Query q = entityManager
+            .createQuery(
+                "SELECT SUM(e.valor) FROM Gastos e WHERE TO_CHAR(e.fechaCreacion, 'yyyy-MM-dd') " + "BETWEEN :fechaInicio AND :fechaFin"
+            )
+            .setParameter("fechaInicio", fechaInicioFormat)
+            .setParameter("fechaFin", fechaFinFormat);
+
+        BigDecimal value = (BigDecimal) q.getSingleResult();
+
+        if (null == value) {
+            value = BigDecimal.ZERO;
+        }
+
+        return value;
     }
 
     @Override

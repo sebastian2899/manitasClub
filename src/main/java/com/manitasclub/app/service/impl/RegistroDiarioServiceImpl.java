@@ -5,10 +5,14 @@ import com.manitasclub.app.repository.RegistroDiarioRepository;
 import com.manitasclub.app.service.RegistroDiarioService;
 import com.manitasclub.app.service.dto.RegistroDiarioDTO;
 import com.manitasclub.app.service.mapper.RegistroDiarioMapper;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,9 @@ public class RegistroDiarioServiceImpl implements RegistroDiarioService {
     private final RegistroDiarioRepository registroDiarioRepository;
 
     private final RegistroDiarioMapper registroDiarioMapper;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public RegistroDiarioServiceImpl(RegistroDiarioRepository registroDiarioRepository, RegistroDiarioMapper registroDiarioMapper) {
         this.registroDiarioRepository = registroDiarioRepository;
@@ -72,6 +79,31 @@ public class RegistroDiarioServiceImpl implements RegistroDiarioService {
             .stream()
             .map(registroDiarioMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional
+    public BigDecimal valorPorMeses(String fechaInicio, String fechaFin) {
+        log.debug("find value per months");
+
+        String fechaInicioFormat = fechaInicio.substring(0, 10);
+        String fechaFinFormat = fechaFin.substring(0, 10);
+
+        Query q = entityManager
+            .createQuery(
+                "SELECT SUM(e.valor) FROM RegistroDiario e WHERE TO_CHAR(e.fechaIngreso, 'yyyy-MM-dd') " +
+                "BETWEEN :fechaInicio AND :fechaFin"
+            )
+            .setParameter("fechaInicio", fechaInicioFormat)
+            .setParameter("fechaFin", fechaFinFormat);
+
+        BigDecimal value = (BigDecimal) q.getSingleResult();
+
+        if (null == value) {
+            value = BigDecimal.ZERO;
+        }
+
+        return value;
     }
 
     @Override

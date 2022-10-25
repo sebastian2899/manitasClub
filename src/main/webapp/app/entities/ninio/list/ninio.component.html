@@ -70,7 +70,7 @@
           <td>{{ ninio.doucumentoIdentidad }}</td>
           <td>{{ ninio.fechaNacimiento | formatMediumDatetime }}</td>
           <td>{{ ninio.edad }}</td>
-          <td>{{ ninio.observacion }}</td>
+          <td>{{ ninio.observacion === true ? 'Si' : 'No' }}</td>
           <td>{{ ninio.descripcionObservacion }}</td>
           <td>
             <a *ngIf="ninio.foto" (click)="openFile(ninio.foto, ninio.fotoContentType)">

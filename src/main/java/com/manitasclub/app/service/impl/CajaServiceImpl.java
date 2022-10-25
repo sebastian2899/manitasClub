@@ -97,6 +97,30 @@ public class CajaServiceImpl implements CajaService {
     }
 
     @Override
+    @Transactional
+    public BigDecimal valorPorMeses(String fechaInicio, String fechaFin) {
+        log.debug("find value per months");
+
+        String fechaInicioFormat = fechaInicio.substring(0, 10);
+        String fechaFinFormat = fechaFin.substring(0, 10);
+
+        Query q = entityManager
+            .createQuery(
+                "SELECT SUM(c.valorDia) FROM Caja c WHERE TO_CHAR(c.fechaCreacion, 'yyyy-MM-dd') " + "BETWEEN :fechaInicio AND :fechaFin"
+            )
+            .setParameter("fechaInicio", fechaInicioFormat)
+            .setParameter("fechaFin", fechaFinFormat);
+
+        BigDecimal value = (BigDecimal) q.getSingleResult();
+
+        if (null == value) {
+            value = BigDecimal.ZERO;
+        }
+
+        return value;
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CajaDTO> findAll() {
         log.debug("Request to get all Cajas");

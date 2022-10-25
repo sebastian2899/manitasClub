@@ -10,9 +10,13 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,6 +103,13 @@ public class CajaResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cajaDTO.getId().toString()))
             .body(result);
+    }
+
+    @GetMapping("cajas/consultarValorMes/{fechaInicio}/{fechaFin}")
+    public ResponseEntity<BigDecimal> valuePerMonths(@PathVariable String fechaInicio, @PathVariable String fechaFin) {
+        log.debug("Rest request to get values per months");
+        BigDecimal value = cajaService.valorPorMeses(fechaInicio, fechaFin);
+        return new ResponseEntity<>(value, HttpStatus.OK);
     }
 
     /**

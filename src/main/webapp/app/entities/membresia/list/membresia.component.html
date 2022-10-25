@@ -23,6 +23,7 @@
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
+  <button (click)="opneModal()" class="btn btn-outline-info mb-5 mt-5">Consultar Valor por meses</button>
 
   <div class="alert alert-warning" id="no-result" *ngIf="membresias?.length === 0">
     <span jhiTranslate="manitasclubApp.membresia.home.notFound">No membresias found</span>
@@ -36,6 +37,7 @@
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaInicio">Fecha Inicio</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaFin">Fecha Fin</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.cantidad">Cantidad</span></th>
+          <th scope="col"><span>Precio Membresia</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.estado">Estado</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.descripcion">Descripcion</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.tipo">Tipo</span></th>
@@ -49,6 +51,7 @@
           <td>{{ membresia.fechaInicio | formatMediumDatetime }}</td>
           <td>{{ membresia.fechaFin | formatMediumDatetime }}</td>
           <td>{{ membresia.cantidad }}</td>
+          <td>{{ membresia.precioMembresia }}</td>
           <td jhiTranslate="{{ 'manitasclubApp.EstadoMembresia.' + membresia.estado }}">{{ membresia.estado }}</td>
           <td>{{ membresia.descripcion }}</td>
           <td>
@@ -94,3 +97,32 @@
     </table>
   </div>
 </div>
+
+<ng-template #consultarCajaFechas>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Consultar Caja por Fechas</h4>
+    <button (click)="back()" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
+        <label for="" class="form-label">Fecha Inicio</label>
+        <input type="date" class="form-control" [(ngModel)]="fechaInicio" name="fechaInicio" id="fechaInicio" required />
+      </div>
+      <div class="col-md-4">
+        <label for="" class="form-label">Fecha Fin</label>
+        <input type="date" class="form-control" [(ngModel)]="fechaFin" name="fechaFin" id="fechaFin" required />
+      </div>
+    </div>
+    <div class="mt-3 d-flex justify-content-center">
+      <button [disabled]="!fechaInicio || !fechaFin" class="btn btn-outline-info me-5" (click)="consultarValorMeses()">Consultar</button>
+    </div>
+
+    <div *ngIf="valorTotal" class="mt-5 mb-4 d-flex justify-content-center">
+      <h4>Valor Total: {{ valorTotal }}</h4>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-danger" (click)="back()">Salir</button>
+  </div>
+</ng-template>

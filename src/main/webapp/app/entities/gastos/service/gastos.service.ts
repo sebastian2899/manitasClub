@@ -11,10 +11,12 @@ import { IGastos, getGastosIdentifier } from '../gastos.model';
 
 export type EntityResponseType = HttpResponse<IGastos>;
 export type EntityArrayResponseType = HttpResponse<IGastos[]>;
+export type NumberResponseType = HttpResponse<number>;
 
 @Injectable({ providedIn: 'root' })
 export class GastosService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/gastos');
+  protected ValuePerDatesUrl = this.applicationConfigService.getEndpointFor('api/gastos/consultarValorMes');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -23,6 +25,10 @@ export class GastosService {
     return this.http
       .post<IGastos>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  consultarValorMes(fechaInicio: string, fechaFin: string): Observable<NumberResponseType> {
+    return this.http.get<number>(`${this.ValuePerDatesUrl}/${fechaInicio}/${fechaFin}}`, { observe: 'response' });
   }
 
   update(gastos: IGastos): Observable<EntityResponseType> {

@@ -11,10 +11,12 @@ import { IRegistroDiario, getRegistroDiarioIdentifier } from '../registro-diario
 
 export type EntityResponseType = HttpResponse<IRegistroDiario>;
 export type EntityArrayResponseType = HttpResponse<IRegistroDiario[]>;
+export type NumberResponseType = HttpResponse<number>;
 
 @Injectable({ providedIn: 'root' })
 export class RegistroDiarioService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/registro-diarios');
+  protected ValuePerDatesUrl = this.applicationConfigService.getEndpointFor('api/registro-diarios/consultarValorMes');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -23,6 +25,10 @@ export class RegistroDiarioService {
     return this.http
       .post<IRegistroDiario>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  consultarValorMes(fechaInicio: string, fechaFin: string): Observable<NumberResponseType> {
+    return this.http.get<number>(`${this.ValuePerDatesUrl}/${fechaInicio}/${fechaFin}}`, { observe: 'response' });
   }
 
   update(registroDiario: IRegistroDiario): Observable<EntityResponseType> {

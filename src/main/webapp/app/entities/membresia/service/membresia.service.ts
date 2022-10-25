@@ -11,10 +11,12 @@ import { IMembresia, getMembresiaIdentifier } from '../membresia.model';
 
 export type EntityResponseType = HttpResponse<IMembresia>;
 export type EntityArrayResponseType = HttpResponse<IMembresia[]>;
+export type NumberResponseType = HttpResponse<number>;
 
 @Injectable({ providedIn: 'root' })
 export class MembresiaService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/membresias');
+  protected ValuePerDatesUrl = this.applicationConfigService.getEndpointFor('api/membresias/consultarValorMes');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -23,6 +25,10 @@ export class MembresiaService {
     return this.http
       .post<IMembresia>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  consultarValorMes(fechaInicio: string, fechaFin: string): Observable<NumberResponseType> {
+    return this.http.get<number>(`${this.ValuePerDatesUrl}/${fechaInicio}/${fechaFin}}`, { observe: 'response' });
   }
 
   update(membresia: IMembresia): Observable<EntityResponseType> {

@@ -56,4 +56,6 @@ public interface CajaService {
     void delete(Long id);
 
     BigDecimal valoresDiarios();
+
+    BigDecimal valorPorMeses(String fechaInicio, String fechaFin);
 }

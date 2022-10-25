@@ -4,6 +4,7 @@ import com.manitasclub.app.repository.RegistroDiarioRepository;
 import com.manitasclub.app.service.RegistroDiarioService;
 import com.manitasclub.app.service.dto.RegistroDiarioDTO;
 import com.manitasclub.app.web.rest.errors.BadRequestAlertException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -140,6 +142,13 @@ public class RegistroDiarioResource {
     public List<RegistroDiarioDTO> getAllRegistroDiarios() {
         log.debug("REST request to get all RegistroDiarios");
         return registroDiarioService.findAll();
+    }
+
+    @GetMapping("registro-diarios/consultarValorMes/{fechaInicio}/{fechaFin}")
+    public ResponseEntity<BigDecimal> valuePerMonths(@PathVariable String fechaInicio, @PathVariable String fechaFin) {
+        log.debug("Rest request to get values per months");
+        BigDecimal value = registroDiarioService.valorPorMeses(fechaInicio, fechaFin);
+        return new ResponseEntity<>(value, HttpStatus.OK);
     }
 
     /**

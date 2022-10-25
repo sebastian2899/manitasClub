@@ -5,6 +5,7 @@ import com.manitasclub.app.repository.MembresiaRepository;
 import com.manitasclub.app.service.MembresiaService;
 import com.manitasclub.app.service.dto.MembresiaDTO;
 import com.manitasclub.app.web.rest.errors.BadRequestAlertException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,6 +103,13 @@ public class MembresiaResource {
             .ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, membresiaDTO.getId().toString()))
             .body(result);
+    }
+
+    @GetMapping("membresias/consultarValorMes/{fechaInicio}/{fechaFin}")
+    public ResponseEntity<BigDecimal> valuePerMonths(@PathVariable String fechaInicio, @PathVariable String fechaFin) {
+        log.debug("Rest request to get values per months");
+        BigDecimal value = membresiaService.valorPorMeses(fechaInicio, fechaFin);
+        return new ResponseEntity<>(value, HttpStatus.OK);
     }
 
     /**
