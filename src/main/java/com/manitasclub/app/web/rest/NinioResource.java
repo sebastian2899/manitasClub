@@ -1,5 +1,6 @@
 package com.manitasclub.app.web.rest;
 
+import com.manitasclub.app.domain.Ninio;
 import com.manitasclub.app.repository.NinioRepository;
 import com.manitasclub.app.service.NinioService;
 import com.manitasclub.app.service.dto.NinioDTO;
@@ -136,9 +137,15 @@ public class NinioResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ninios in body.
      */
     @GetMapping("/ninios")
-    public List<NinioDTO> getAllNinios() {
+    public List<Ninio> getAllNinios() {
         log.debug("REST request to get all Ninios");
         return ninioService.findAll();
+    }
+
+    @PostMapping("/ninios/findByParameters")
+    public List<Ninio> findByParameters(@RequestBody NinioDTO ninioDTO) {
+        log.debug("REST request to get all Ninios");
+        return ninioService.ninioByFilter(ninioDTO);
     }
 
     /**

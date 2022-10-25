@@ -1,5 +1,6 @@
 package com.manitasclub.app.service;
 
+import com.manitasclub.app.domain.Membresia;
 import com.manitasclub.app.service.dto.MembresiaDTO;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public interface MembresiaService {
      *
      * @return the list of entities.
      */
-    List<MembresiaDTO> findAll();
+    List<Membresia> findAll();
 
     /**
      * Get the "id" membresia.
@@ -45,7 +46,7 @@ public interface MembresiaService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<MembresiaDTO> findOne(Long id);
+    Optional<Membresia> findOne(Long id);
 
     /**
      * Delete the "id" membresia.

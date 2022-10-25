@@ -15,7 +15,7 @@ export type EntityArrayResponseType = HttpResponse<INinio[]>;
 @Injectable({ providedIn: 'root' })
 export class NinioService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/ninios');
-
+  protected filtroUrl = this.applicationConfigService.getEndpointFor('api/ninios/findByParameters');
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(ninio: INinio): Observable<EntityResponseType> {
@@ -23,6 +23,13 @@ export class NinioService {
     return this.http
       .post<INinio>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  queryFilter(ninio: INinio): Observable<EntityArrayResponseType> {
+    const copy = this.convertDateFromClient(ninio);
+    return this.http
+      .post<INinio[]>(this.filtroUrl, copy, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   update(ninio: INinio): Observable<EntityResponseType> {

@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -65,16 +67,16 @@ public class MembresiaServiceImpl implements MembresiaService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<MembresiaDTO> findAll() {
+    public List<Membresia> findAll() {
         log.debug("Request to get all Membresias");
-        return membresiaRepository.findAll().stream().map(membresiaMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return membresiaRepository.findAll().stream().collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<MembresiaDTO> findOne(Long id) {
+    public Optional<Membresia> findOne(Long id) {
         log.debug("Request to get Membresia : {}", id);
-        return membresiaRepository.findById(id).map(membresiaMapper::toDto);
+        return membresiaRepository.findById(id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.manitasclub.app.service;
 
+import com.manitasclub.app.domain.Ninio;
 import com.manitasclub.app.service.dto.NinioDTO;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public interface NinioService {
      *
      * @return the list of entities.
      */
-    List<NinioDTO> findAll();
+    List<Ninio> findAll();
 
     /**
      * Get the "id" ninio.
@@ -46,6 +47,8 @@ public interface NinioService {
      * @return the entity.
      */
     Optional<NinioDTO> findOne(Long id);
+
+    List<Ninio> ninioByFilter(NinioDTO ninioDTO);
 
     /**
      * Delete the "id" ninio.

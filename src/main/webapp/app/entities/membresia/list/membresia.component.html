@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaCreacion">Fecha Creacion</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaInicio">Fecha Inicio</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaFin">Fecha Fin</span></th>
@@ -46,9 +45,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let membresia of membresias; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/membresia', membresia.id, 'view']">{{ membresia.id }}</a>
-          </td>
           <td>{{ membresia.fechaCreacion | formatMediumDatetime }}</td>
           <td>{{ membresia.fechaInicio | formatMediumDatetime }}</td>
           <td>{{ membresia.fechaFin | formatMediumDatetime }}</td>
@@ -57,12 +53,12 @@
           <td>{{ membresia.descripcion }}</td>
           <td>
             <div *ngIf="membresia.tipo">
-              <a [routerLink]="['/tipo-membresia', membresia.tipo?.id, 'view']">{{ membresia.tipo?.id }}</a>
+              <a [routerLink]="['/tipo-membresia', membresia.tipo.id, 'view']">{{ membresia.tipo.nombreMembresia }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="membresia.ninio">
-              <a [routerLink]="['/ninio', membresia.ninio?.id, 'view']">{{ membresia.ninio?.id }}</a>
+              <a [routerLink]="['/ninio', membresia.ninio.id, 'view']">{{ membresia.ninio.nombres }}</a>
             </div>
           </td>
           <td class="text-end">

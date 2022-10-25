@@ -8,64 +8,67 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.nombre" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.apellido" for="field_apellido">Apellido</label>
+            <input type="text" class="form-control" name="apellido" id="field_apellido" data-cy="apellido" formControlName="apellido" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.tipoIdentifiacacion" for="field_tipoIdentifiacacion"
+              >Tipo Identifiacacion</label
+            >
+            <select
+              class="form-control"
+              name="tipoIdentifiacacion"
+              formControlName="tipoIdentifiacacion"
+              id="field_tipoIdentifiacacion"
+              data-cy="tipoIdentifiacacion"
+            >
+              <option [ngValue]="null">{{ 'manitasclubApp.TipoIdentificacion.null' | translate }}</option>
+              <option *ngFor="let tipoIdentificacion of tipoIdentificacionValues" [value]="tipoIdentificacion">
+                {{ 'manitasclubApp.TipoIdentificacion.' + tipoIdentificacion | translate }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.direccion" for="field_direccion">Direccion</label>
+            <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.telefono" for="field_telefono">Telefono</label>
+            <input type="text" class="form-control" name="telefono" id="field_telefono" data-cy="telefono" formControlName="telefono" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.nombre" for="field_nombre">Nombre</label>
-          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.apellido" for="field_apellido">Apellido</label>
-          <input type="text" class="form-control" name="apellido" id="field_apellido" data-cy="apellido" formControlName="apellido" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.tipoIdentifiacacion" for="field_tipoIdentifiacacion"
-            >Tipo Identifiacacion</label
-          >
-          <select
-            class="form-control"
-            name="tipoIdentifiacacion"
-            formControlName="tipoIdentifiacacion"
-            id="field_tipoIdentifiacacion"
-            data-cy="tipoIdentifiacacion"
-          >
-            <option [ngValue]="null">{{ 'manitasclubApp.TipoIdentificacion.null' | translate }}</option>
-            <option *ngFor="let tipoIdentificacion of tipoIdentificacionValues" [value]="tipoIdentificacion">
-              {{ 'manitasclubApp.TipoIdentificacion.' + tipoIdentificacion | translate }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.direccion" for="field_direccion">Direccion</label>
-          <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.telefono" for="field_telefono">Telefono</label>
-          <input type="text" class="form-control" name="telefono" id="field_telefono" data-cy="telefono" formControlName="telefono" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.email" for="field_email">Email</label>
-          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.acudiente.parentesco" for="field_parentesco">Parentesco</label>
-          <input
-            type="text"
-            class="form-control"
-            name="parentesco"
-            id="field_parentesco"
-            data-cy="parentesco"
-            formControlName="parentesco"
-          />
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.parentesco" for="field_parentesco">Parentesco</label>
+            <input
+              type="text"
+              class="form-control"
+              name="parentesco"
+              id="field_parentesco"
+              data-cy="parentesco"
+              formControlName="parentesco"
+            />
+          </div>
         </div>
       </div>
 

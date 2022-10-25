@@ -1,5 +1,6 @@
 package com.manitasclub.app.web.rest;
 
+import com.manitasclub.app.domain.Membresia;
 import com.manitasclub.app.repository.MembresiaRepository;
 import com.manitasclub.app.service.MembresiaService;
 import com.manitasclub.app.service.dto.MembresiaDTO;
@@ -13,7 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -136,7 +145,7 @@ public class MembresiaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of membresias in body.
      */
     @GetMapping("/membresias")
-    public List<MembresiaDTO> getAllMembresias() {
+    public List<Membresia> getAllMembresias() {
         log.debug("REST request to get all Membresias");
         return membresiaService.findAll();
     }
@@ -148,9 +157,9 @@ public class MembresiaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the membresiaDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/membresias/{id}")
-    public ResponseEntity<MembresiaDTO> getMembresia(@PathVariable Long id) {
+    public ResponseEntity<Membresia> getMembresia(@PathVariable Long id) {
         log.debug("REST request to get Membresia : {}", id);
-        Optional<MembresiaDTO> membresiaDTO = membresiaService.findOne(id);
+        Optional<Membresia> membresiaDTO = membresiaService.findOne(id);
         return ResponseUtil.wrapOrNotFound(membresiaDTO);
     }
 

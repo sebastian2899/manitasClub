@@ -26,6 +26,7 @@ export class MembresiaUpdateComponent implements OnInit {
 
   tiposCollection: ITipoMembresia[] = [];
   niniosCollection: INinio[] = [];
+  tipoMembresias: ITipoMembresia[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -37,6 +38,7 @@ export class MembresiaUpdateComponent implements OnInit {
     descripcion: [],
     tipo: [],
     ninio: [],
+    precioMembresia: [],
   });
 
   constructor(
@@ -59,7 +61,37 @@ export class MembresiaUpdateComponent implements OnInit {
       this.updateForm(membresia);
 
       this.loadRelationshipsOptions();
+      this.tipoMembresiaService.query().subscribe((res: HttpResponse<ITipoMembresia[]>) => (this.tipoMembresias = res.body ?? []));
     });
+  }
+
+  calcularFechaFin(): void {
+    let cantTotal;
+    const tipoMembresia = this.editForm.get(['tipo'])!.value;
+    const fechaInicio = this.editForm.get(['fechaInicio'])!.value;
+    if (tipoMembresia) {
+      const cantidad = this.editForm.get(['cantidad'])!.value;
+      if (tipoMembresia.nombreMembresia === 'Mes') {
+        cantTotal = cantidad * 30;
+      } else if (tipoMembresia.nombreMembresia === 'Quincena') {
+        cantTotal = cantidad * 15;
+      } else if (tipoMembresia.nombreMembresia === 'Semana') {
+        cantTotal = cantidad * 7;
+      }
+
+      this.calcularPrecioMembresia();
+      const fechaFin = dayjs(fechaInicio).add(Number(cantTotal), 'day');
+      this.editForm.get(['fechaFin'])!.setValue(fechaFin.format(DATE_TIME_FORMAT));
+      this.editForm.get(['estado'])!.setValue(EstadoMembresia.ACTIVA);
+    }
+  }
+
+  calcularPrecioMembresia(): void {
+    const tipoMembresia = this.editForm.get(['tipo'])!.value;
+    const cantidad = this.editForm.get(['cantidad'])!.value;
+    if (tipoMembresia && cantidad) {
+      this.editForm.get(['precioMembresia'])!.setValue(Number(tipoMembresia.valorMembresia) * Number(cantidad));
+    }
   }
 
   previousState(): void {
@@ -114,6 +146,7 @@ export class MembresiaUpdateComponent implements OnInit {
       descripcion: membresia.descripcion,
       tipo: membresia.tipo,
       ninio: membresia.ninio,
+      precioMembresia: membresia.precioMembresia,
     });
 
     this.tiposCollection = this.tipoMembresiaService.addTipoMembresiaToCollectionIfMissing(this.tiposCollection, membresia.tipo);
@@ -154,6 +187,7 @@ export class MembresiaUpdateComponent implements OnInit {
       descripcion: this.editForm.get(['descripcion'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
       ninio: this.editForm.get(['ninio'])!.value,
+      precioMembresia: this.editForm.get(['precioMembresia'])!.value,
     };
   }
 }

@@ -3,8 +3,19 @@ package com.manitasclub.app.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.manitasclub.app.domain.enumeration.EstadoMembresia;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -43,6 +54,14 @@ public class Membresia implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    public BigDecimal getPrecioMembresia() {
+        return precioMembresia;
+    }
+
+    public void setPrecioMembresia(BigDecimal precioMembresia) {
+        this.precioMembresia = precioMembresia;
+    }
+
     @OneToOne
     @JoinColumn(unique = true)
     private TipoMembresia tipo;
@@ -51,6 +70,9 @@ public class Membresia implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Ninio ninio;
+
+    @Column(name = "precio_membresia")
+    private BigDecimal precioMembresia;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 

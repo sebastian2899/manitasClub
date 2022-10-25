@@ -8,128 +8,135 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.nombres" for="field_nombres">Nombres</label>
+            <input type="text" class="form-control" name="nombres" id="field_nombres" data-cy="nombres" formControlName="nombres" />
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.nombres" for="field_nombres">Nombres</label>
-          <input type="text" class="form-control" name="nombres" id="field_nombres" data-cy="nombres" formControlName="nombres" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.apellidos" for="field_apellidos">Apellidos</label>
-          <input type="text" class="form-control" name="apellidos" id="field_apellidos" data-cy="apellidos" formControlName="apellidos" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.doucumentoIdentidad" for="field_doucumentoIdentidad"
-            >Doucumento Identidad</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="doucumentoIdentidad"
-            id="field_doucumentoIdentidad"
-            data-cy="doucumentoIdentidad"
-            formControlName="doucumentoIdentidad"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.fechaNacimiento" for="field_fechaNacimiento">Fecha Nacimiento</label>
-          <div class="d-flex">
-            <input
-              id="field_fechaNacimiento"
-              data-cy="fechaNacimiento"
-              type="datetime-local"
-              class="form-control"
-              name="fechaNacimiento"
-              formControlName="fechaNacimiento"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.apellidos" for="field_apellidos">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" id="field_apellidos" data-cy="apellidos" formControlName="apellidos" />
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.edad" for="field_edad">Edad</label>
-          <input type="number" class="form-control" name="edad" id="field_edad" data-cy="edad" formControlName="edad" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.observacion" for="field_observacion">Observacion</label>
-          <input
-            type="checkbox"
-            class="form-check"
-            name="observacion"
-            id="field_observacion"
-            data-cy="observacion"
-            formControlName="observacion"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.descripcionObservacion" for="field_descripcionObservacion"
-            >Descripcion Observacion</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="descripcionObservacion"
-            id="field_descripcionObservacion"
-            data-cy="descripcionObservacion"
-            formControlName="descripcionObservacion"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.foto" for="field_foto">Foto</label>
-          <div>
-            <img
-              [src]="'data:' + editForm.get('fotoContentType')!.value + ';base64,' + editForm.get('foto')!.value"
-              style="max-height: 100px"
-              *ngIf="editForm.get('foto')!.value"
-              alt="ninio image"
-            />
-            <div *ngIf="editForm.get('foto')!.value" class="form-text text-danger clearfix">
-              <span class="pull-start">{{ editForm.get('fotoContentType')!.value }}, {{ byteSize(editForm.get('foto')!.value) }}</span>
-              <button
-                type="button"
-                (click)="clearInputImage('foto', 'fotoContentType', 'file_foto')"
-                class="btn btn-secondary btn-xs pull-end"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
-            </div>
-            <input
-              type="file"
-              id="file_foto"
-              data-cy="foto"
-              (change)="setFileData($event, 'foto', true)"
-              accept="image/*"
-              jhiTranslate="entity.action.addimage"
-            />
-          </div>
-          <input type="hidden" class="form-control" name="foto" id="field_foto" data-cy="foto" formControlName="foto" />
-          <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType" formControlName="fotoContentType" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.ninio.acudiente" for="field_acudiente">Acudiente</label>
-          <select class="form-control" id="field_acudiente" data-cy="acudiente" name="acudiente" formControlName="acudiente">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="acudienteOption.id === editForm.get('acudiente')!.value?.id ? editForm.get('acudiente')!.value : acudienteOption"
-              *ngFor="let acudienteOption of acudientesCollection; trackBy: trackAcudienteById"
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.doucumentoIdentidad" for="field_doucumentoIdentidad"
+              >Doucumento Identidad</label
             >
-              {{ acudienteOption.id }}
-            </option>
-          </select>
+            <input
+              type="text"
+              class="form-control"
+              name="doucumentoIdentidad"
+              id="field_doucumentoIdentidad"
+              data-cy="doucumentoIdentidad"
+              formControlName="doucumentoIdentidad"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.fechaNacimiento" for="field_fechaNacimiento"
+              >Fecha Nacimiento</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_fechaNacimiento"
+                data-cy="fechaNacimiento"
+                type="datetime-local"
+                class="form-control"
+                name="fechaNacimiento"
+                formControlName="fechaNacimiento"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.observacion" for="field_observacion">Observacion</label>
+            <input
+              type="checkbox"
+              class="form-check"
+              name="observacion"
+              id="field_observacion"
+              data-cy="observacion"
+              formControlName="observacion"
+            />
+          </div>
+
+          <div class="col-md-6" *ngIf="this.editForm.get(['observacion'])!.value">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.descripcionObservacion" for="field_descripcionObservacion"
+              >Descripcion Observacion</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="descripcionObservacion"
+              id="field_descripcionObservacion"
+              data-cy="descripcionObservacion"
+              formControlName="descripcionObservacion"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.edad" for="field_edad">Edad</label>
+            <input type="number" class="form-control" name="edad" id="field_edad" data-cy="edad" formControlName="edad" />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.foto" for="field_foto">Foto</label>
+            <div>
+              <img
+                [src]="'data:' + editForm.get('fotoContentType')!.value + ';base64,' + editForm.get('foto')!.value"
+                style="max-height: 100px"
+                *ngIf="editForm.get('foto')!.value"
+                alt="ninio image"
+              />
+              <div *ngIf="editForm.get('foto')!.value" class="form-text text-danger clearfix">
+                <span class="pull-start">{{ editForm.get('fotoContentType')!.value }}, {{ byteSize(editForm.get('foto')!.value) }}</span>
+                <button
+                  type="button"
+                  (click)="clearInputImage('foto', 'fotoContentType', 'file_foto')"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+              <input
+                type="file"
+                id="file_foto"
+                data-cy="foto"
+                (change)="setFileData($event, 'foto', true)"
+                accept="image/*"
+                jhiTranslate="entity.action.addimage"
+              />
+            </div>
+            <input type="hidden" class="form-control" name="foto" id="field_foto" data-cy="foto" formControlName="foto" />
+            <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType" formControlName="fotoContentType" />
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.ninio.acudiente" for="field_acudiente">Acudiente</label>
+            <select class="form-control" id="field_acudiente" data-cy="acudiente" name="acudiente" formControlName="acudiente">
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="acudienteOption.id === editForm.get('acudiente')!.value?.id ? editForm.get('acudiente')!.value : acudienteOption"
+                *ngFor="let acudienteOption of acudientesCollection; trackBy: trackAcudienteById"
+              >
+                {{ acudienteOption.nombre }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div>
+      <div class="mt-3">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>

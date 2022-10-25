@@ -11,10 +11,12 @@ import { ICaja, getCajaIdentifier } from '../caja.model';
 
 export type EntityResponseType = HttpResponse<ICaja>;
 export type EntityArrayResponseType = HttpResponse<ICaja[]>;
+export type NumberResponseType = HttpResponse<number>;
 
 @Injectable({ providedIn: 'root' })
 export class CajaService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/cajas');
+  protected ValueDayUrl = this.applicationConfigService.getEndpointFor('api/cajas/valueDay');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -23,6 +25,10 @@ export class CajaService {
     return this.http
       .post<ICaja>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  consultarValorDiario(): Observable<NumberResponseType> {
+    return this.http.get<number>(this.ValueDayUrl, { observe: 'response' });
   }
 
   update(caja: ICaja): Observable<EntityResponseType> {

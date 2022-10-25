@@ -13,6 +13,7 @@ export interface IMembresia {
   descripcion?: string | null;
   tipo?: ITipoMembresia | null;
   ninio?: INinio | null;
+  precioMembresia?: number | null;
 }
 
 export class Membresia implements IMembresia {
@@ -25,7 +26,8 @@ export class Membresia implements IMembresia {
     public estado?: EstadoMembresia | null,
     public descripcion?: string | null,
     public tipo?: ITipoMembresia | null,
-    public ninio?: INinio | null
+    public ninio?: INinio | null,
+    public precioMembresia?: number | null
   ) {}
 }
 

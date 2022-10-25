@@ -10,10 +10,6 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ membresia.id }}</span>
-        </dd>
         <dt><span jhiTranslate="manitasclubApp.membresia.fechaCreacion">Fecha Creacion</span></dt>
         <dd>
           <span>{{ membresia.fechaCreacion | formatMediumDatetime }}</span>
@@ -41,13 +37,13 @@
         <dt><span jhiTranslate="manitasclubApp.membresia.tipo">Tipo</span></dt>
         <dd>
           <div *ngIf="membresia.tipo">
-            <a [routerLink]="['/tipo-membresia', membresia.tipo?.id, 'view']">{{ membresia.tipo?.id }}</a>
+            <a [routerLink]="['/tipo-membresia', membresia.tipo.id, 'view']">{{ membresia.tipo.nombreMembresia }}</a>
           </div>
         </dd>
         <dt><span jhiTranslate="manitasclubApp.membresia.ninio">Ninio</span></dt>
         <dd>
           <div *ngIf="membresia.ninio">
-            <a [routerLink]="['/ninio', membresia.ninio?.id, 'view']">{{ membresia.ninio?.id }}</a>
+            <a [routerLink]="['/ninio', membresia.ninio.id, 'view']">{{ membresia.ninio.nombres }}</a>
           </div>
         </dd>
       </dl>

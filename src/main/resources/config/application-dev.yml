@@ -50,7 +50,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/manitas_club
     username: postgres
-    password: Asdf1234
+    password: admin
     hikari:
       poolName: Hikari
       auto-commit: false

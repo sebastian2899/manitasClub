@@ -12,93 +12,96 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.nombreNinio" for="field_nombreNinio">Nombre Ninio</label>
-          <input
-            type="text"
-            class="form-control"
-            name="nombreNinio"
-            id="field_nombreNinio"
-            data-cy="nombreNinio"
-            formControlName="nombreNinio"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.nombreAcudiente" for="field_nombreAcudiente"
-            >Nombre Acudiente</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="nombreAcudiente"
-            id="field_nombreAcudiente"
-            data-cy="nombreAcudiente"
-            formControlName="nombreAcudiente"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.telefonoAcudiente" for="field_telefonoAcudiente"
-            >Telefono Acudiente</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="telefonoAcudiente"
-            id="field_telefonoAcudiente"
-            data-cy="telefonoAcudiente"
-            formControlName="telefonoAcudiente"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.valor" for="field_valor">Valor</label>
-          <input type="number" class="form-control" name="valor" id="field_valor" data-cy="valor" formControlName="valor" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.fechaIngreso" for="field_fechaIngreso">Fecha Ingreso</label>
-          <div class="d-flex">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.nombreNinio" for="field_nombreNinio">Nombre Ninio</label>
             <input
-              id="field_fechaIngreso"
-              data-cy="fechaIngreso"
-              type="datetime-local"
+              type="text"
               class="form-control"
-              name="fechaIngreso"
-              formControlName="fechaIngreso"
-              placeholder="YYYY-MM-DD HH:mm"
+              name="nombreNinio"
+              id="field_nombreNinio"
+              data-cy="nombreNinio"
+              formControlName="nombreNinio"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.nombreAcudiente" for="field_nombreAcudiente"
+              >Nombre Acudiente</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="nombreAcudiente"
+              id="field_nombreAcudiente"
+              data-cy="nombreAcudiente"
+              formControlName="nombreAcudiente"
             />
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.horaEntrada" for="field_horaEntrada">Hora Entrada</label>
-          <input
-            type="text"
-            class="form-control"
-            name="horaEntrada"
-            id="field_horaEntrada"
-            data-cy="horaEntrada"
-            formControlName="horaEntrada"
-          />
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.telefonoAcudiente" for="field_telefonoAcudiente"
+              >Telefono Acudiente</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="telefonoAcudiente"
+              id="field_telefonoAcudiente"
+              data-cy="telefonoAcudiente"
+              formControlName="telefonoAcudiente"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.valor" for="field_valor">Valor</label>
+            <input type="number" class="form-control" name="valor" id="field_valor" data-cy="valor" formControlName="valor" />
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.horaSalida" for="field_horaSalida">Hora Salida</label>
-          <input
-            type="text"
-            class="form-control"
-            name="horaSalida"
-            id="field_horaSalida"
-            data-cy="horaSalida"
-            formControlName="horaSalida"
-          />
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.fechaIngreso" for="field_fechaIngreso"
+              >Fecha Ingreso</label
+            >
+            <div class="d-flex">
+              <input
+                id="field_fechaIngreso"
+                data-cy="fechaIngreso"
+                type="datetime-local"
+                class="form-control"
+                name="fechaIngreso"
+                formControlName="fechaIngreso"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.horaEntrada" for="field_horaEntrada">Hora Entrada</label>
+            <input
+              type="text"
+              class="form-control"
+              name="horaEntrada"
+              id="field_horaEntrada"
+              data-cy="horaEntrada"
+              formControlName="horaEntrada"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label" jhiTranslate="manitasclubApp.registroDiario.horaSalida" for="field_horaSalida">Hora Salida</label>
+            <input
+              type="text"
+              class="form-control"
+              name="horaSalida"
+              id="field_horaSalida"
+              data-cy="horaSalida"
+              formControlName="horaSalida"
+            />
+          </div>
         </div>
       </div>
 

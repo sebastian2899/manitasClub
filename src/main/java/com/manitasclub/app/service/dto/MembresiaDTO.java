@@ -3,6 +3,7 @@ package com.manitasclub.app.service.dto;
 import com.manitasclub.app.domain.enumeration.EstadoMembresia;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -29,6 +30,16 @@ public class MembresiaDTO implements Serializable {
     private TipoMembresiaDTO tipo;
 
     private NinioDTO ninio;
+
+    private BigDecimal precioMembresia;
+
+    public BigDecimal getPrecioMembresia() {
+        return precioMembresia;
+    }
+
+    public void setPrecioMembresia(BigDecimal precioMembresia) {
+        this.precioMembresia = precioMembresia;
+    }
 
     public Long getId() {
         return id;

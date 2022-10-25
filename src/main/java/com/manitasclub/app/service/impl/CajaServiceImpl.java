@@ -5,10 +5,15 @@ import com.manitasclub.app.repository.CajaRepository;
 import com.manitasclub.app.service.CajaService;
 import com.manitasclub.app.service.dto.CajaDTO;
 import com.manitasclub.app.service.mapper.CajaMapper;
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,6 +32,9 @@ public class CajaServiceImpl implements CajaService {
 
     private final CajaMapper cajaMapper;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public CajaServiceImpl(CajaRepository cajaRepository, CajaMapper cajaMapper) {
         this.cajaRepository = cajaRepository;
         this.cajaMapper = cajaMapper;
@@ -36,6 +44,7 @@ public class CajaServiceImpl implements CajaService {
     public CajaDTO save(CajaDTO cajaDTO) {
         log.debug("Request to save Caja : {}", cajaDTO);
         Caja caja = cajaMapper.toEntity(cajaDTO);
+        caja.fechaCreacion(Instant.now());
         caja = cajaRepository.save(caja);
         return cajaMapper.toDto(caja);
     }
@@ -61,6 +70,30 @@ public class CajaServiceImpl implements CajaService {
             })
             .map(cajaRepository::save)
             .map(cajaMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public BigDecimal valoresDiarios() {
+        String fecha = Instant.now().toString().substring(0, 10);
+
+        Query q = entityManager
+            .createNativeQuery("SELECT SUM(m.precio_membresia) FROM membresia AS m WHERE TO_CHAR(m.fecha_creacion, 'yyyy-MM-dd') = :fecha")
+            .setParameter("fecha", fecha);
+        BigDecimal valueMembresia = (BigDecimal) q.getSingleResult();
+        if (valueMembresia == null) {
+            valueMembresia = BigDecimal.ZERO;
+        }
+
+        Query q2 = entityManager
+            .createNativeQuery("SELECT SUM(r.valor) FROM registro_diario AS r WHERE TO_CHAR(r.fecha_ingreso, 'yyyy-MM-dd') = :fecha")
+            .setParameter("fecha", fecha);
+        BigDecimal valueRegistroDiario = (BigDecimal) q2.getSingleResult();
+        if (valueRegistroDiario == null) {
+            valueRegistroDiario = BigDecimal.ZERO;
+        }
+
+        return valueMembresia.add(valueRegistroDiario);
     }
 
     @Override

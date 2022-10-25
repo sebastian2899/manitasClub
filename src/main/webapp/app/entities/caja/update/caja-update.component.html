@@ -8,63 +8,79 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.membresia.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
+            <div class="d-flex">
+              <input
+                id="field_fechaCreacion"
+                data-cy="fechaCreacion"
+                type="datetime-local"
+                class="form-control"
+                name="fechaCreacion"
+                formControlName="fechaCreacion"
+                placeholder="YYYY-MM-DD HH:mm"
+              />
+            </div>
+          </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.caja.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
-          <div class="d-flex">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.caja.valorDia" for="field_valorDia">Valor Dia</label>
             <input
-              id="field_fechaCreacion"
-              data-cy="fechaCreacion"
-              type="datetime-local"
+              type="number"
               class="form-control"
-              name="fechaCreacion"
-              formControlName="fechaCreacion"
-              placeholder="YYYY-MM-DD HH:mm"
+              name="valorDia"
+              id="field_valorDia"
+              data-cy="valorDia"
+              formControlName="valorDia"
+              readonly
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.caja.valorRegistrado" for="field_valorRegistrado"
+              >Valor Registrado</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="valorRegistrado"
+              id="field_valorRegistrado"
+              data-cy="valorRegistrado"
+              formControlName="valorRegistrado"
+              (keyup)="calcularDiferencia()"
             />
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.caja.valorDia" for="field_valorDia">Valor Dia</label>
-          <input type="number" class="form-control" name="valorDia" id="field_valorDia" data-cy="valorDia" formControlName="valorDia" />
-        </div>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.caja.diferencia" for="field_diferencia">Diferencia</label>
+            <input
+              type="number"
+              class="form-control"
+              name="diferencia"
+              id="field_diferencia"
+              data-cy="diferencia"
+              formControlName="diferencia"
+              readonly
+            />
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.caja.valorRegistrado" for="field_valorRegistrado">Valor Registrado</label>
-          <input
-            type="number"
-            class="form-control"
-            name="valorRegistrado"
-            id="field_valorRegistrado"
-            data-cy="valorRegistrado"
-            formControlName="valorRegistrado"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.caja.diferencia" for="field_diferencia">Diferencia</label>
-          <input
-            type="number"
-            class="form-control"
-            name="diferencia"
-            id="field_diferencia"
-            data-cy="diferencia"
-            formControlName="diferencia"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.caja.estado" for="field_estado">Estado</label>
-          <select class="form-control" name="estado" formControlName="estado" id="field_estado" data-cy="estado">
-            <option [ngValue]="null">{{ 'manitasclubApp.EstadoCaja.null' | translate }}</option>
-            <option *ngFor="let estadoCaja of estadoCajaValues" [value]="estadoCaja">
-              {{ 'manitasclubApp.EstadoCaja.' + estadoCaja | translate }}
-            </option>
-          </select>
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.caja.estado" for="field_estado">Estado</label>
+            <input
+              class="form-control"
+              [disabled]="true"
+              name="estado"
+              formControlName="estado"
+              id="field_estado"
+              data-cy="estado"
+              readonly
+            />
+          </div>
         </div>
       </div>
 

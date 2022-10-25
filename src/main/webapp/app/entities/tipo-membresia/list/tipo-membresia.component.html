@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.tipoMembresia.nombreMembresia">Nombre Membresia</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.tipoMembresia.valorMembresia">Valor Membresia</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.tipoMembresia.descripcion">Descripcion</span></th>
@@ -41,9 +40,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let tipoMembresia of tipoMembresias; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/tipo-membresia', tipoMembresia.id, 'view']">{{ tipoMembresia.id }}</a>
-          </td>
           <td>{{ tipoMembresia.nombreMembresia }}</td>
           <td>{{ tipoMembresia.valorMembresia }}</td>
           <td>{{ tipoMembresia.descripcion }}</td>

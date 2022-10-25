@@ -20,10 +20,28 @@
     </div>
   </h2>
 
-  <mat-icon>more_vert</mat-icon>
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
+
+  <div class="row d-flex justify-content-center mt-5 mb-5">
+    <div class="col-md-2">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="nombreNinio" placeholder="Nombre niño" />
+    </div>
+
+    <div class="col-md-2">
+      <label for="nombre" class="form-label">Apellido</label>
+      <input type="text" class="form-control" [(ngModel)]="apellidosNinio" placeholder="Nombre niño" />
+    </div>
+
+    <div class="col-md-2">
+      <label for="nombre" class="form-label">Observacion</label>
+      <br />
+      <button class="btn btn-outline-info" (click)="isObsv()">Niños con observación</button>
+      <button class="ms-2 btn btn-outline-info" (click)="loadAllFilters()">Buscar</button>
+    </div>
+  </div>
 
   <div class="alert alert-warning" id="no-result" *ngIf="ninios?.length === 0">
     <span jhiTranslate="manitasclubApp.ninio.home.notFound">No ninios found</span>
@@ -33,7 +51,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.ninio.nombres">Nombres</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.ninio.apellidos">Apellidos</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.ninio.doucumentoIdentidad">Doucumento Identidad</span></th>
@@ -48,9 +65,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let ninio of ninios; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/ninio', ninio.id, 'view']">{{ ninio.id }}</a>
-          </td>
           <td>{{ ninio.nombres }}</td>
           <td>{{ ninio.apellidos }}</td>
           <td>{{ ninio.doucumentoIdentidad }}</td>
@@ -66,7 +80,7 @@
           </td>
           <td>
             <div *ngIf="ninio.acudiente">
-              <a [routerLink]="['/acudiente', ninio.acudiente?.id, 'view']">{{ ninio.acudiente?.id }}</a>
+              <a [routerLink]="['/acudiente', ninio.acudiente.id, 'view']">{{ ninio.acudiente.nombre }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -12,52 +12,50 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.nombreMembresia" for="field_nombreMembresia"
+              >Nombre Membresia</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              name="nombreMembresia"
+              id="field_nombreMembresia"
+              data-cy="nombreMembresia"
+              formControlName="nombreMembresia"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.valorMembresia" for="field_valorMembresia"
+              >Valor Membresia</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              name="valorMembresia"
+              id="field_valorMembresia"
+              data-cy="valorMembresia"
+              formControlName="valorMembresia"
+            />
+          </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.nombreMembresia" for="field_nombreMembresia"
-            >Nombre Membresia</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            name="nombreMembresia"
-            id="field_nombreMembresia"
-            data-cy="nombreMembresia"
-            formControlName="nombreMembresia"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.valorMembresia" for="field_valorMembresia"
-            >Valor Membresia</label
-          >
-          <input
-            type="number"
-            class="form-control"
-            name="valorMembresia"
-            id="field_valorMembresia"
-            data-cy="valorMembresia"
-            formControlName="valorMembresia"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.descripcion" for="field_descripcion">Descripcion</label>
-          <input
-            type="text"
-            class="form-control"
-            name="descripcion"
-            id="field_descripcion"
-            data-cy="descripcion"
-            formControlName="descripcion"
-          />
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.tipoMembresia.descripcion" for="field_descripcion">Descripcion</label>
+            <input
+              type="text"
+              class="form-control"
+              name="descripcion"
+              id="field_descripcion"
+              data-cy="descripcion"
+              formControlName="descripcion"
+            />
+          </div>
         </div>
       </div>
-
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

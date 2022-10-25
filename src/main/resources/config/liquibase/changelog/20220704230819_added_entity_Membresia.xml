@@ -38,6 +38,9 @@
             <column name="ninio_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_membresia__ninio_id" />
             </column>
+             <column name="precio_membresia" type="decimal(21,2)">
+                <constraints nullable="true"/>
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="membresia" columnName="fecha_creacion" columnDataType="${datetimeType}"/>
@@ -68,6 +71,7 @@
             <column name="cantidad" type="numeric"/>
             <column name="estado" type="string"/>
             <column name="descripcion" type="string"/>
+            <column name="precio_membresia" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

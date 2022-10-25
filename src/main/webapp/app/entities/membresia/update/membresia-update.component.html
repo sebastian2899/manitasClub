@@ -8,27 +8,37 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.membresia.tipo" for="field_tipo">Tipo</label>
+            <select class="form-select" id="field_tipo" data-cy="tipo" name="tipo" formControlName="tipo" (click)="calcularFechaFin()">
+              <option [ngValue]="null"></option>
+              <option
+                [ngValue]="tipoMembresiaOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoMembresiaOption"
+                *ngFor="let tipoMembresiaOption of tiposCollection; trackBy: trackTipoMembresiaById"
+              >
+                {{ tipoMembresiaOption.nombreMembresia }}
+              </option>
+            </select>
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.membresia.fechaCreacion" for="field_fechaCreacion">Fecha Creacion</label>
-          <div class="d-flex">
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.membresia.cantidad" for="field_cantidad">Cantidad</label>
             <input
-              id="field_fechaCreacion"
-              data-cy="fechaCreacion"
-              type="datetime-local"
+              type="number"
               class="form-control"
-              name="fechaCreacion"
-              formControlName="fechaCreacion"
-              placeholder="YYYY-MM-DD HH:mm"
+              name="cantidad"
+              id="field_cantidad"
+              data-cy="cantidad"
+              (keyup)="calcularFechaFin()"
+              formControlName="cantidad"
             />
           </div>
         </div>
+      </div>
 
-        <div class="row mb-3">
+      <div class="row mb-2" *ngIf="this.editForm.get(['tipo'])!.value && this.editForm.get(['cantidad'])!.value">
+        <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
           <div class="d-flex">
             <input
@@ -39,11 +49,12 @@
               name="fechaInicio"
               formControlName="fechaInicio"
               placeholder="YYYY-MM-DD HH:mm"
+              (click)="calcularFechaFin()"
             />
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.fechaFin" for="field_fechaFin">Fecha Fin</label>
           <div class="d-flex">
             <input
@@ -54,26 +65,51 @@
               name="fechaFin"
               formControlName="fechaFin"
               placeholder="YYYY-MM-DD HH:mm"
+              readonly
             />
           </div>
         </div>
+      </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.membresia.cantidad" for="field_cantidad">Cantidad</label>
-          <input type="number" class="form-control" name="cantidad" id="field_cantidad" data-cy="cantidad" formControlName="cantidad" />
+      <div class="row mb-2" *ngIf="this.editForm.get(['tipo'])!.value && this.editForm.get(['cantidad'])!.value">
+        <div class="col-md-6">
+          <label class="form-label" for="field_descripcion">Precio Membresia</label>
+          <input
+            type="text"
+            class="form-control"
+            name="precioMembresia"
+            id="field_precioMembresia"
+            data-cy="precioMembresia"
+            formControlName="precioMembresia"
+          />
         </div>
 
-        <div class="row mb-3">
+        <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.estado" for="field_estado">Estado</label>
-          <select class="form-control" name="estado" formControlName="estado" id="field_estado" data-cy="estado">
+          <select class="form-control" name="estado" formControlName="estado" id="field_estado" data-cy="estado" readonly>
             <option [ngValue]="null">{{ 'manitasclubApp.EstadoMembresia.null' | translate }}</option>
             <option *ngFor="let estadoMembresia of estadoMembresiaValues" [value]="estadoMembresia">
               {{ 'manitasclubApp.EstadoMembresia.' + estadoMembresia | translate }}
             </option>
           </select>
         </div>
+      </div>
 
-        <div class="row mb-3">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label" jhiTranslate="manitasclubApp.membresia.ninio" for="field_ninio">Ninio</label>
+          <select class="form-select" id="field_ninio" data-cy="ninio" name="ninio" formControlName="ninio">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="ninioOption.id === editForm.get('ninio')!.value?.id ? editForm.get('ninio')!.value : ninioOption"
+              *ngFor="let ninioOption of niniosCollection; trackBy: trackNinioById"
+            >
+              {{ ninioOption.nombres }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.descripcion" for="field_descripcion">Descripcion</label>
           <input
             type="text"
@@ -83,32 +119,6 @@
             data-cy="descripcion"
             formControlName="descripcion"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.membresia.tipo" for="field_tipo">Tipo</label>
-          <select class="form-control" id="field_tipo" data-cy="tipo" name="tipo" formControlName="tipo">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="tipoMembresiaOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoMembresiaOption"
-              *ngFor="let tipoMembresiaOption of tiposCollection; trackBy: trackTipoMembresiaById"
-            >
-              {{ tipoMembresiaOption.id }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="manitasclubApp.membresia.ninio" for="field_ninio">Ninio</label>
-          <select class="form-control" id="field_ninio" data-cy="ninio" name="ninio" formControlName="ninio">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="ninioOption.id === editForm.get('ninio')!.value?.id ? editForm.get('ninio')!.value : ninioOption"
-              *ngFor="let ninioOption of niniosCollection; trackBy: trackNinioById"
-            >
-              {{ ninioOption.id }}
-            </option>
-          </select>
         </div>
       </div>
 

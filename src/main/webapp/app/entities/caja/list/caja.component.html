@@ -32,7 +32,6 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.caja.fechaCreacion">Fecha Creacion</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.caja.valorDia">Valor Dia</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.caja.valorRegistrado">Valor Registrado</span></th>
@@ -43,9 +42,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let caja of cajas; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/caja', caja.id, 'view']">{{ caja.id }}</a>
-          </td>
           <td>{{ caja.fechaCreacion | formatMediumDatetime }}</td>
           <td>{{ caja.valorDia }}</td>
           <td>{{ caja.valorRegistrado }}</td>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { INinio } from '../ninio.model';
+import { INinio, Ninio } from '../ninio.model';
 import { NinioService } from '../service/ninio.service';
 import { NinioDeleteDialogComponent } from '../delete/ninio-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
@@ -14,6 +14,9 @@ import { DataUtils } from 'app/core/util/data-util.service';
 export class NinioComponent implements OnInit {
   ninios?: INinio[];
   isLoading = false;
+  nombreNinio?: string | null;
+  apellidosNinio?: string | null;
+  isObervacion?: boolean = false;
 
   constructor(protected ninioService: NinioService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
 
@@ -29,6 +32,24 @@ export class NinioComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  loadAllFilters(): void {
+    const ninio = new Ninio();
+    ninio.nombres = this.nombreNinio;
+    ninio.apellidos = this.apellidosNinio;
+    ninio.observacion = this.isObervacion;
+
+    this.ninioService.queryFilter(ninio).subscribe({
+      next: (res: HttpResponse<INinio[]>) => {
+        this.isLoading = false;
+        this.ninios = res.body ?? [];
+      },
+    });
+  }
+
+  isObsv(): void {
+    this.isObervacion = !this.isObervacion;
   }
 
   ngOnInit(): void {

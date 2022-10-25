@@ -37,8 +37,26 @@ export class CajaUpdateComponent implements OnInit {
         const today = dayjs().startOf('day');
         caja.fechaCreacion = today;
       }
-
+      this.findValueDay();
       this.updateForm(caja);
+    });
+  }
+
+  findValueDay(): void {
+    this.cajaService.consultarValorDiario().subscribe((res: HttpResponse<number>) => {
+      this.editForm.patchValue({
+        valorDia: res.body,
+        estado: EstadoCaja.DEUDA,
+      });
+    });
+  }
+
+  calcularDiferencia(): void {
+    const valorDia = this.editForm.get(['valorDia'])!.value;
+    const valorRegistrado = this.editForm.get(['valorRegistrado'])!.value;
+    const diferencia = valorRegistrado - valorDia;
+    this.editForm.patchValue({
+      diferencia: Number(diferencia),
     });
   }
 
