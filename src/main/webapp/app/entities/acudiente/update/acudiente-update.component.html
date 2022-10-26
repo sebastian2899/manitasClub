@@ -8,7 +8,7 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-md-6">
             <label class="form-label" jhiTranslate="manitasclubApp.acudiente.nombre" for="field_nombre">Nombre</label>
             <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
@@ -20,7 +20,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-md-6">
             <label class="form-label" jhiTranslate="manitasclubApp.acudiente.tipoIdentifiacacion" for="field_tipoIdentifiacacion"
               >Tipo Identifiacacion</label
@@ -40,12 +40,19 @@
           </div>
 
           <div class="col-md-6">
-            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.direccion" for="field_direccion">Direccion</label>
-            <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
+            <label class="form-label" for="field_direccion">Numero Identificacion</label>
+            <input
+              type="text"
+              class="form-control"
+              name="numeroIdentificacion"
+              id="field_numeroIdentificacion"
+              data-cy="numeroIdentificacion"
+              formControlName="numeroIdentificacion"
+            />
           </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
           <div class="col-md-6">
             <label class="form-label" jhiTranslate="manitasclubApp.acudiente.telefono" for="field_telefono">Telefono</label>
             <input type="text" class="form-control" name="telefono" id="field_telefono" data-cy="telefono" formControlName="telefono" />
@@ -68,6 +75,11 @@
               data-cy="parentesco"
               formControlName="parentesco"
             />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" jhiTranslate="manitasclubApp.acudiente.direccion" for="field_direccion">Direccion</label>
+            <input type="text" class="form-control" name="direccion" id="field_direccion" data-cy="direccion" formControlName="direccion" />
           </div>
         </div>
       </div>

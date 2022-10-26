@@ -1,5 +1,6 @@
 package com.manitasclub.app.domain;
 
+import com.manitasclub.app.service.dto.AcudienteDTO;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
@@ -54,6 +55,12 @@ public class Ninio implements Serializable {
     @JoinColumn(unique = true)
     private Acudiente acudiente;
 
+    @Column(name = "id_acudiente")
+    private Long idAcudiente;
+
+    @Transient
+    private AcudienteDTO acudiente2;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -63,6 +70,14 @@ public class Ninio implements Serializable {
     public Ninio id(Long id) {
         this.setId(id);
         return this;
+    }
+
+    public AcudienteDTO getAcudiente2() {
+        return acudiente2;
+    }
+
+    public void setAcudiente2(AcudienteDTO acudiente2) {
+        this.acudiente2 = acudiente2;
     }
 
     public void setId(Long id) {
@@ -76,6 +91,14 @@ public class Ninio implements Serializable {
     public Ninio nombres(String nombres) {
         this.setNombres(nombres);
         return this;
+    }
+
+    public Long getIdAcudiente() {
+        return idAcudiente;
+    }
+
+    public void setIdAcudiente(Long idAcudiente) {
+        this.idAcudiente = idAcudiente;
     }
 
     public void setNombres(String nombres) {

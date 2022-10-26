@@ -35,7 +35,9 @@ public class AcudienteServiceImpl implements AcudienteService {
     @Override
     public AcudienteDTO save(AcudienteDTO acudienteDTO) {
         log.debug("Request to save Acudiente : {}", acudienteDTO);
+        String numId = acudienteDTO.getNumeroIdentificacion();
         Acudiente acudiente = acudienteMapper.toEntity(acudienteDTO);
+        acudiente.setNumeroIdentificacion(numId);
         acudiente = acudienteRepository.save(acudiente);
         return acudienteMapper.toDto(acudiente);
     }

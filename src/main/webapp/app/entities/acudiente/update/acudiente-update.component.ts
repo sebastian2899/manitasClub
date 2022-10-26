@@ -26,6 +26,7 @@ export class AcudienteUpdateComponent implements OnInit {
     telefono: [],
     email: [],
     parentesco: [],
+    numeroIdentificacion: [],
   });
 
   constructor(protected acudienteService: AcudienteService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -79,6 +80,7 @@ export class AcudienteUpdateComponent implements OnInit {
       telefono: acudiente.telefono,
       email: acudiente.email,
       parentesco: acudiente.parentesco,
+      numeroIdentificacion: acudiente.numeroIdentificacion,
     });
   }
 
@@ -93,6 +95,7 @@ export class AcudienteUpdateComponent implements OnInit {
       telefono: this.editForm.get(['telefono'])!.value,
       email: this.editForm.get(['email'])!.value,
       parentesco: this.editForm.get(['parentesco'])!.value,
+      numeroIdentificacion: this.editForm.get(['numeroIdentificacion'])!.value,
     };
   }
 }

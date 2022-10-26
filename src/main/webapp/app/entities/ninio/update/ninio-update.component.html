@@ -122,13 +122,10 @@
 
         <div class="row mb-2">
           <div class="col-md-6">
-            <label class="form-label" jhiTranslate="manitasclubApp.ninio.acudiente" for="field_acudiente">Acudiente</label>
-            <select class="form-control" id="field_acudiente" data-cy="acudiente" name="acudiente" formControlName="acudiente">
+            <label class="form-label" for="field_idAcudiente">Acudiente</label>
+            <select class="form-control" id="field_acudiente" data-cy="idAcudiente" name="idAcudiente" formControlName="idAcudiente">
               <option [ngValue]="null"></option>
-              <option
-                [ngValue]="acudienteOption.id === editForm.get('acudiente')!.value?.id ? editForm.get('acudiente')!.value : acudienteOption"
-                *ngFor="let acudienteOption of acudientesCollection; trackBy: trackAcudienteById"
-              >
+              <option [ngValue]="acudienteOption.id" *ngFor="let acudienteOption of acudientesCollection; trackBy: trackAcudienteById">
                 {{ acudienteOption.nombre }}
               </option>
             </select>

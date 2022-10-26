@@ -37,6 +37,7 @@ export class NinioUpdateComponent implements OnInit {
     foto: [],
     fotoContentType: [],
     acudiente: [],
+    idAcudiente: [],
   });
 
   constructor(
@@ -137,21 +138,14 @@ export class NinioUpdateComponent implements OnInit {
       foto: ninio.foto,
       fotoContentType: ninio.fotoContentType,
       acudiente: ninio.acudiente,
+      idAcudiente: ninio.idAcudiente,
     });
 
     this.acudientesCollection = this.acudienteService.addAcudienteToCollectionIfMissing(this.acudientesCollection, ninio.acudiente);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.acudienteService
-      .query({ filter: 'ninio-is-null' })
-      .pipe(map((res: HttpResponse<IAcudiente[]>) => res.body ?? []))
-      .pipe(
-        map((acudientes: IAcudiente[]) =>
-          this.acudienteService.addAcudienteToCollectionIfMissing(acudientes, this.editForm.get('acudiente')!.value)
-        )
-      )
-      .subscribe((acudientes: IAcudiente[]) => (this.acudientesCollection = acudientes));
+    this.acudienteService.query().subscribe((res: HttpResponse<IAcudiente[]>) => (this.acudientesCollection = res.body ?? []));
   }
 
   protected createFromForm(): INinio {
@@ -170,6 +164,7 @@ export class NinioUpdateComponent implements OnInit {
       fotoContentType: this.editForm.get(['fotoContentType'])!.value,
       foto: this.editForm.get(['foto'])!.value,
       acudiente: this.editForm.get(['acudiente'])!.value,
+      idAcudiente: this.editForm.get(['idAcudiente'])!.value,
     };
   }
 }

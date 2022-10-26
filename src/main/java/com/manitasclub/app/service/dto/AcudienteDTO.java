@@ -25,6 +25,8 @@ public class AcudienteDTO implements Serializable {
 
     private String parentesco;
 
+    private String numeroIdentificacion;
+
     public Long getId() {
         return id;
     }
@@ -47,6 +49,14 @@ public class AcudienteDTO implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
     }
 
     public TipoIdentificacion getTipoIdentifiacacion() {

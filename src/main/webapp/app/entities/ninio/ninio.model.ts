@@ -13,6 +13,8 @@ export interface INinio {
   fotoContentType?: string | null;
   foto?: string | null;
   acudiente?: IAcudiente | null;
+  idAcudiente?: number | null;
+  acudiente2?: IAcudiente | null;
 }
 
 export class Ninio implements INinio {
@@ -27,7 +29,9 @@ export class Ninio implements INinio {
     public descripcionObservacion?: string | null,
     public fotoContentType?: string | null,
     public foto?: string | null,
-    public acudiente?: IAcudiente | null
+    public acudiente?: IAcudiente | null,
+    public idAcudiente?: number | null,
+    public acudiente2?: IAcudiente | null
   ) {
     this.observacion = this.observacion ?? false;
   }

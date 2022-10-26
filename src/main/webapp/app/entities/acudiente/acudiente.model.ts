@@ -9,6 +9,7 @@ export interface IAcudiente {
   telefono?: string | null;
   email?: string | null;
   parentesco?: string | null;
+  numeroIdentificacion?: string | null;
 }
 
 export class Acudiente implements IAcudiente {
@@ -20,7 +21,8 @@ export class Acudiente implements IAcudiente {
     public direccion?: string | null,
     public telefono?: string | null,
     public email?: string | null,
-    public parentesco?: string | null
+    public parentesco?: string | null,
+    public numeroIdentificacion?: string | null
   ) {}
 }
 

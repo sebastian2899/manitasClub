@@ -44,6 +44,9 @@ public class Acudiente implements Serializable {
     @Column(name = "parentesco")
     private String parentesco;
 
+    @Column(name = "numero_identficacion")
+    private String numeroIdentificacion;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -66,6 +69,14 @@ public class Acudiente implements Serializable {
     public Acudiente nombre(String nombre) {
         this.setNombre(nombre);
         return this;
+    }
+
+    public String getNumeroIdentificacion() {
+        return numeroIdentificacion;
+    }
+
+    public void setNumeroIdentificacion(String numeroIdentificacion) {
+        this.numeroIdentificacion = numeroIdentificacion;
     }
 
     public void setNombre(String nombre) {

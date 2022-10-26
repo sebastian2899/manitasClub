@@ -26,11 +26,15 @@ public class NinioDTO implements Serializable {
 
     private String descripcionObservacion;
 
+    private Long idAcudiente;
+
     @Lob
     private byte[] foto;
 
     private String fotoContentType;
     private AcudienteDTO acudiente;
+
+    public AcudienteDTO acudiente2;
 
     public Long getId() {
         return id;
@@ -96,6 +100,14 @@ public class NinioDTO implements Serializable {
         this.descripcionObservacion = descripcionObservacion;
     }
 
+    public AcudienteDTO getAcudiente2() {
+        return acudiente2;
+    }
+
+    public void setAcudiente2(AcudienteDTO acudiente2) {
+        this.acudiente2 = acudiente2;
+    }
+
     public byte[] getFoto() {
         return foto;
     }
@@ -118,6 +130,14 @@ public class NinioDTO implements Serializable {
 
     public void setAcudiente(AcudienteDTO acudiente) {
         this.acudiente = acudiente;
+    }
+
+    public Long getIdAcudiente() {
+        return idAcudiente;
+    }
+
+    public void setIdAcudiente(Long idAcudiente) {
+        this.idAcudiente = idAcudiente;
     }
 
     @Override

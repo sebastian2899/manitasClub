@@ -2,11 +2,15 @@ package com.manitasclub.app.service.impl;
 
 import static org.springframework.data.jpa.domain.Specification.where;
 
+import com.manitasclub.app.domain.Acudiente;
 import com.manitasclub.app.domain.Ninio;
+import com.manitasclub.app.repository.AcudienteRepository;
 import com.manitasclub.app.repository.NinioRepository;
 import com.manitasclub.app.repository.NinioSpecification;
 import com.manitasclub.app.service.NinioService;
+import com.manitasclub.app.service.dto.AcudienteDTO;
 import com.manitasclub.app.service.dto.NinioDTO;
+import com.manitasclub.app.service.mapper.AcudienteMapper;
 import com.manitasclub.app.service.mapper.NinioMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,15 +34,32 @@ public class NinioServiceImpl implements NinioService {
 
     private final NinioMapper ninioMapper;
 
-    public NinioServiceImpl(NinioRepository ninioRepository, NinioMapper ninioMapper) {
+    private final AcudienteRepository acudienteRepository;
+
+    private final AcudienteMapper acudienteMapper;
+
+    public NinioServiceImpl(
+        NinioRepository ninioRepository,
+        NinioMapper ninioMapper,
+        AcudienteRepository acudienteRepository,
+        AcudienteMapper acudienteMapper
+    ) {
         this.ninioRepository = ninioRepository;
         this.ninioMapper = ninioMapper;
+        this.acudienteRepository = acudienteRepository;
+        this.acudienteMapper = acudienteMapper;
     }
 
     @Override
     public NinioDTO save(NinioDTO ninioDTO) {
         log.debug("Request to save Ninio : {}", ninioDTO);
+        Long id = null;
+        if (ninioDTO.getIdAcudiente() != null) {
+            id = ninioDTO.getIdAcudiente();
+        }
         Ninio ninio = ninioMapper.toEntity(ninioDTO);
+        ninio.setIdAcudiente(id);
+
         ninio = ninioRepository.save(ninio);
         return ninioMapper.toDto(ninio);
     }
@@ -73,7 +94,20 @@ public class NinioServiceImpl implements NinioService {
     @Transactional(readOnly = true)
     public List<Ninio> findAll() {
         log.debug("Request to get all Ninios");
-        return ninioRepository.findAll().stream().collect(Collectors.toCollection(LinkedList::new));
+
+        List<Ninio> ninios = ninioRepository
+            .findAll()
+            .stream()
+            .map(ninio -> {
+                if (null != ninio.getIdAcudiente()) {
+                    Acudiente acudiente = acudienteRepository.findById(ninio.getIdAcudiente()).get();
+                    ninio.setAcudiente(acudiente);
+                }
+                return ninio;
+            })
+            .collect(Collectors.toCollection(LinkedList::new));
+
+        return ninios;
     }
 
     @Override
@@ -81,6 +115,10 @@ public class NinioServiceImpl implements NinioService {
     public Optional<NinioDTO> findOne(Long id) {
         log.debug("Request to get Ninio : {}", id);
         return ninioRepository.findById(id).map(ninioMapper::toDto);
+    }
+
+    private Acudiente retornarAcudienteNinio(Long idAcudiente) {
+        return acudienteRepository.getById(idAcudiente);
     }
 
     @Override
