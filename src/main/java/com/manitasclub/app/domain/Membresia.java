@@ -54,6 +54,7 @@ public class Membresia implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name = "id_membresia")
     public BigDecimal getPrecioMembresia() {
         return precioMembresia;
     }
@@ -63,13 +64,18 @@ public class Membresia implements Serializable {
     }
 
     @OneToOne
-    @JoinColumn(unique = true)
     private TipoMembresia tipo;
 
     @JsonIgnoreProperties(value = { "acudiente" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private Ninio ninio;
+
+    @Column(name = "id_ninio")
+    private Long idNinio;
+
+    @Column(name = "id_tipo_membresia")
+    private Long idTipo;
 
     @Column(name = "precio_membresia")
     private BigDecimal precioMembresia;
@@ -83,6 +89,22 @@ public class Membresia implements Serializable {
     public Membresia id(Long id) {
         this.setId(id);
         return this;
+    }
+
+    public Long getIdNinio() {
+        return idNinio;
+    }
+
+    public void setIdNinio(Long idNinio) {
+        this.idNinio = idNinio;
+    }
+
+    public Long getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Long idTipo) {
+        this.idTipo = idTipo;
     }
 
     public void setId(Long id) {

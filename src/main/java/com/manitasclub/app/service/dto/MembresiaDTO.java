@@ -33,6 +33,10 @@ public class MembresiaDTO implements Serializable {
 
     private BigDecimal precioMembresia;
 
+    private Long idNinio;
+
+    private Long idTipo;
+
     public BigDecimal getPrecioMembresia() {
         return precioMembresia;
     }
@@ -51,6 +55,22 @@ public class MembresiaDTO implements Serializable {
 
     public Instant getFechaCreacion() {
         return fechaCreacion;
+    }
+
+    public Long getIdNinio() {
+        return idNinio;
+    }
+
+    public void setIdNinio(Long idNinio) {
+        this.idNinio = idNinio;
+    }
+
+    public Long getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Long idTipo) {
+        this.idTipo = idTipo;
     }
 
     public void setFechaCreacion(Instant fechaCreacion) {

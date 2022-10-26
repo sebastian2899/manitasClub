@@ -33,7 +33,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="tipo_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_membresia__tipo_id" />
+                <constraints nullable="true"/>
             </column>
             <column name="ninio_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_membresia__ninio_id" />

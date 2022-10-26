@@ -1,8 +1,12 @@
 package com.manitasclub.app.service.impl;
 
 import com.manitasclub.app.domain.Membresia;
+import com.manitasclub.app.domain.Ninio;
+import com.manitasclub.app.domain.TipoMembresia;
 import com.manitasclub.app.domain.enumeration.EstadoMembresia;
 import com.manitasclub.app.repository.MembresiaRepository;
+import com.manitasclub.app.repository.NinioRepository;
+import com.manitasclub.app.repository.TipoMembresiaRepository;
 import com.manitasclub.app.service.MembresiaService;
 import com.manitasclub.app.service.dto.MembresiaDTO;
 import com.manitasclub.app.service.mapper.MembresiaMapper;
@@ -34,18 +38,33 @@ public class MembresiaServiceImpl implements MembresiaService {
 
     private final MembresiaMapper membresiaMapper;
 
+    private final NinioRepository ninioRepository;
+
+    private final TipoMembresiaRepository tipoMembresiaRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    public MembresiaServiceImpl(MembresiaRepository membresiaRepository, MembresiaMapper membresiaMapper) {
+    public MembresiaServiceImpl(
+        MembresiaRepository membresiaRepository,
+        MembresiaMapper membresiaMapper,
+        NinioRepository ninioRepository,
+        TipoMembresiaRepository tipoMembresiaRepository
+    ) {
         this.membresiaRepository = membresiaRepository;
         this.membresiaMapper = membresiaMapper;
+        this.ninioRepository = ninioRepository;
+        this.tipoMembresiaRepository = tipoMembresiaRepository;
     }
 
     @Override
     public MembresiaDTO save(MembresiaDTO membresiaDTO) {
         log.debug("Request to save Membresia : {}", membresiaDTO);
+        Long idNinio = membresiaDTO.getIdNinio();
+        Long idTipo = membresiaDTO.getIdTipo();
         Membresia membresia = membresiaMapper.toEntity(membresiaDTO);
+        membresia.setIdNinio(idNinio);
+        membresia.setIdTipo(idTipo);
         membresia = membresiaRepository.save(membresia);
         return membresiaMapper.toDto(membresia);
     }
@@ -116,11 +135,32 @@ public class MembresiaServiceImpl implements MembresiaService {
         return value;
     }
 
+    private Ninio consultarNinio(Long idNinio) {
+        return ninioRepository.getById(idNinio);
+    }
+
+    private TipoMembresia tipoMembresia(Long idTipo) {
+        return tipoMembresiaRepository.getById(idTipo);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<Membresia> findAll() {
         log.debug("Request to get all Membresias");
-        return membresiaRepository.findAll().stream().collect(Collectors.toCollection(LinkedList::new));
+        return membresiaRepository
+            .findAll()
+            .stream()
+            .map(element -> {
+                if (element.getIdTipo() != null && element.getIdNinio() != null) {
+                    TipoMembresia tipoMembresia = tipoMembresiaRepository.findById(element.getIdTipo()).get();
+                    Ninio ninio = ninioRepository.findById(element.getIdNinio()).get();
+                    element.setNinio(ninio);
+                    element.setTipo(tipoMembresia);
+                }
+
+                return element;
+            })
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     @Override

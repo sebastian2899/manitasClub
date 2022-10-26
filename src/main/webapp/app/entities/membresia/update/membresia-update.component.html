@@ -11,10 +11,17 @@
         <div class="row mb-2">
           <div class="col-md-6">
             <label class="form-label" jhiTranslate="manitasclubApp.membresia.tipo" for="field_tipo">Tipo</label>
-            <select class="form-select" id="field_tipo" data-cy="tipo" name="tipo" formControlName="tipo" (click)="calcularFechaFin()">
+            <select
+              class="form-select"
+              id="field_idTipo"
+              data-cy="idTipo"
+              name="idTipo"
+              formControlName="idTipo"
+              (click)="calcularFechaFin()"
+            >
               <option [ngValue]="null"></option>
               <option
-                [ngValue]="tipoMembresiaOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoMembresiaOption"
+                [ngValue]="tipoMembresiaOption.id"
                 *ngFor="let tipoMembresiaOption of tiposCollection; trackBy: trackTipoMembresiaById"
               >
                 {{ tipoMembresiaOption.nombreMembresia }}
@@ -37,7 +44,7 @@
         </div>
       </div>
 
-      <div class="row mb-2" *ngIf="this.editForm.get(['tipo'])!.value && this.editForm.get(['cantidad'])!.value">
+      <div class="row mb-2" *ngIf="this.editForm.get(['idTipo'])!.value && this.editForm.get(['cantidad'])!.value">
         <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.fechaInicio" for="field_fechaInicio">Fecha Inicio</label>
           <div class="d-flex">
@@ -71,7 +78,7 @@
         </div>
       </div>
 
-      <div class="row mb-2" *ngIf="this.editForm.get(['tipo'])!.value && this.editForm.get(['cantidad'])!.value">
+      <div class="row mb-2" *ngIf="this.editForm.get(['idTipo'])!.value && this.editForm.get(['cantidad'])!.value">
         <div class="col-md-6">
           <label class="form-label" for="field_descripcion">Precio Membresia</label>
           <input
@@ -80,6 +87,7 @@
             name="precioMembresia"
             id="field_precioMembresia"
             data-cy="precioMembresia"
+            readonly
             formControlName="precioMembresia"
           />
         </div>
@@ -98,12 +106,9 @@
       <div class="row mb-3">
         <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.ninio" for="field_ninio">Ninio</label>
-          <select class="form-select" id="field_ninio" data-cy="ninio" name="ninio" formControlName="ninio">
+          <select class="form-select" id="field_idNinio" data-cy="idNinio" name="idNinio" formControlName="idNinio">
             <option [ngValue]="null"></option>
-            <option
-              [ngValue]="ninioOption.id === editForm.get('ninio')!.value?.id ? editForm.get('ninio')!.value : ninioOption"
-              *ngFor="let ninioOption of niniosCollection; trackBy: trackNinioById"
-            >
+            <option [ngValue]="ninioOption.id" *ngFor="let ninioOption of niniosCollection; trackBy: trackNinioById">
               {{ ninioOption.nombres }}
             </option>
           </select>

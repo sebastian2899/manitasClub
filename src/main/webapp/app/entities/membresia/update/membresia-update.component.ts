@@ -22,6 +22,7 @@ import { EstadoMembresia } from 'app/entities/enumerations/estado-membresia.mode
 })
 export class MembresiaUpdateComponent implements OnInit {
   isSaving = false;
+  tipSeleccionado!: ITipoMembresia | null;
   estadoMembresiaValues = Object.keys(EstadoMembresia);
 
   tiposCollection: ITipoMembresia[] = [];
@@ -39,6 +40,8 @@ export class MembresiaUpdateComponent implements OnInit {
     tipo: [],
     ninio: [],
     precioMembresia: [],
+    idNinio: [],
+    idTipo: [],
   });
 
   constructor(
@@ -67,15 +70,23 @@ export class MembresiaUpdateComponent implements OnInit {
 
   calcularFechaFin(): void {
     let cantTotal;
-    const tipoMembresia = this.editForm.get(['tipo'])!.value;
+    const tipoMembresia = this.editForm.get(['idTipo'])!.value;
+
+    this.tiposCollection.forEach(element => {
+      if (element.id === tipoMembresia) {
+        this.tipSeleccionado = element;
+      }
+    });
+
     const fechaInicio = this.editForm.get(['fechaInicio'])!.value;
-    if (tipoMembresia) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (this.tipSeleccionado && this.tipSeleccionado.nombreMembresia!) {
       const cantidad = this.editForm.get(['cantidad'])!.value;
-      if (tipoMembresia.nombreMembresia === 'Mes') {
+      if (this.tipSeleccionado.nombreMembresia === 'Mes') {
         cantTotal = cantidad * 30;
-      } else if (tipoMembresia.nombreMembresia === 'Quincena') {
+      } else if (this.tipSeleccionado.nombreMembresia === 'Quincena') {
         cantTotal = cantidad * 15;
-      } else if (tipoMembresia.nombreMembresia === 'Semana') {
+      } else if (this.tipSeleccionado.nombreMembresia === 'Semana') {
         cantTotal = cantidad * 7;
       }
 
@@ -87,10 +98,17 @@ export class MembresiaUpdateComponent implements OnInit {
   }
 
   calcularPrecioMembresia(): void {
-    const tipoMembresia = this.editForm.get(['tipo'])!.value;
+    const tipoMembre = this.editForm.get(['idTipo'])!.value;
+
+    this.tiposCollection.forEach(element => {
+      if (element.id === tipoMembre) {
+        this.tipSeleccionado = element;
+      }
+    });
+
     const cantidad = this.editForm.get(['cantidad'])!.value;
-    if (tipoMembresia && cantidad) {
-      this.editForm.get(['precioMembresia'])!.setValue(Number(tipoMembresia.valorMembresia) * Number(cantidad));
+    if (cantidad) {
+      this.editForm.get(['precioMembresia'])!.setValue(Number(this.tipSeleccionado!.valorMembresia) * Number(cantidad));
     }
   }
 
@@ -147,6 +165,8 @@ export class MembresiaUpdateComponent implements OnInit {
       tipo: membresia.tipo,
       ninio: membresia.ninio,
       precioMembresia: membresia.precioMembresia,
+      idNinio: membresia.ninio?.id,
+      idTipo: membresia.tipo?.id,
     });
 
     this.tiposCollection = this.tipoMembresiaService.addTipoMembresiaToCollectionIfMissing(this.tiposCollection, membresia.tipo);
@@ -156,19 +176,11 @@ export class MembresiaUpdateComponent implements OnInit {
   protected loadRelationshipsOptions(): void {
     this.tipoMembresiaService
       .query({ filter: 'membresia-is-null' })
-      .pipe(map((res: HttpResponse<ITipoMembresia[]>) => res.body ?? []))
-      .pipe(
-        map((tipoMembresias: ITipoMembresia[]) =>
-          this.tipoMembresiaService.addTipoMembresiaToCollectionIfMissing(tipoMembresias, this.editForm.get('tipo')!.value)
-        )
-      )
-      .subscribe((tipoMembresias: ITipoMembresia[]) => (this.tiposCollection = tipoMembresias));
+      .subscribe((res: HttpResponse<ITipoMembresia[]>) => (this.tiposCollection = res.body ?? []));
 
     this.ninioService
       .query({ filter: 'membresia-is-null' })
-      .pipe(map((res: HttpResponse<INinio[]>) => res.body ?? []))
-      .pipe(map((ninios: INinio[]) => this.ninioService.addNinioToCollectionIfMissing(ninios, this.editForm.get('ninio')!.value)))
-      .subscribe((ninios: INinio[]) => (this.niniosCollection = ninios));
+      .subscribe((res: HttpResponse<INinio[]>) => (this.niniosCollection = res.body ?? []));
   }
 
   protected createFromForm(): IMembresia {
@@ -188,6 +200,8 @@ export class MembresiaUpdateComponent implements OnInit {
       tipo: this.editForm.get(['tipo'])!.value,
       ninio: this.editForm.get(['ninio'])!.value,
       precioMembresia: this.editForm.get(['precioMembresia'])!.value,
+      idNinio: this.editForm.get(['idNinio'])!.value,
+      idTipo: this.editForm.get(['idTipo'])!.value,
     };
   }
 }
