@@ -23,6 +23,7 @@
     <include file="config/liquibase/changelog/20220704230821_added_entity_Caja.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220704230822_added_entity_Gastos.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220704230823_added_entity_TotalGastos.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20221027135100_added_entity_Abono.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20220704230816_added_entity_constraints_Ninio.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220704230819_added_entity_constraints_Membresia.xml" relativeToChangelogFile="false"/>

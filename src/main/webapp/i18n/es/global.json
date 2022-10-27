@@ -15,6 +15,7 @@
         "caja": "Caja",
         "gastos": "Gastos",
         "totalGastos": "Total Gastos",
+        "abono": "Abono",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

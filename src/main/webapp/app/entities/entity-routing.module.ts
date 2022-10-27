@@ -44,6 +44,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'manitasclubApp.totalGastos.home.title' },
         loadChildren: () => import('./total-gastos/total-gastos.module').then(m => m.TotalGastosModule),
       },
+      {
+        path: 'abono',
+        data: { pageTitle: 'manitasclubApp.abono.home.title' },
+        loadChildren: () => import('./abono/abono.module').then(m => m.AbonoModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

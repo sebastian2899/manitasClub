@@ -1,0 +1,24 @@
+{
+  "changelogDate": "20221027135100",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "idMembresia",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fechaAbono",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "valorAbono",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "jpaMetamodelFiltering": false,
+  "name": "Abono",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

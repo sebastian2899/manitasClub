@@ -59,6 +59,7 @@ public class CacheConfiguration {
             createCache(cm, com.manitasclub.app.domain.Caja.class.getName());
             createCache(cm, com.manitasclub.app.domain.Gastos.class.getName());
             createCache(cm, com.manitasclub.app.domain.TotalGastos.class.getName());
+            createCache(cm, com.manitasclub.app.domain.Abono.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
