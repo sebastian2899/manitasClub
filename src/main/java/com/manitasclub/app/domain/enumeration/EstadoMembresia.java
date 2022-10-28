@@ -7,4 +7,5 @@ public enum EstadoMembresia {
     VENCIDA,
     ACTIVA,
     CANCELADA,
+    DEUDA,
 }

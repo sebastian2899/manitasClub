@@ -8,7 +8,7 @@
         <span jhiTranslate="manitasclubApp.abono.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button
+      <!-- <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-abono"
@@ -16,7 +16,7 @@
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="manitasclubApp.abono.home.createLabel"> Create a new Abono </span>
-      </button>
+      </button> -->
     </div>
   </h2>
 
@@ -24,18 +24,18 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="abonos?.length === 0">
-    <span jhiTranslate="manitasclubApp.abono.home.notFound">No abonos found</span>
+  <div class="d-flex justify-content-center alert alert-warning" id="no-result" *ngIf="abonos?.length === 0">
+    <span>No hay abonos registrados para la Membresia de {{ membresia!.ninio!.nombres! }}</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="abonos && abonos.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="reset()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="idMembresia">
+          <!-- <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th> -->
+          <!-- <th scope="col" jhiSortBy="idMembresia">
             <span jhiTranslate="manitasclubApp.abono.idMembresia">Id Membresia</span> <fa-icon icon="sort"></fa-icon>
-          </th>
+          </th> -->
           <th scope="col" jhiSortBy="fechaAbono">
             <span jhiTranslate="manitasclubApp.abono.fechaAbono">Fecha Abono</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -47,10 +47,6 @@
       </thead>
       <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
         <tr *ngFor="let abono of abonos; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/abono', abono.id, 'view']">{{ abono.id }}</a>
-          </td>
-          <td>{{ abono.idMembresia }}</td>
           <td>{{ abono.fechaAbono | formatMediumDatetime }}</td>
           <td>{{ abono.valorAbono }}</td>
           <td class="text-end">
@@ -60,7 +56,7 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/abono', abono.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <!-- <button type="submit" [routerLink]="['/abono', abono.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
@@ -68,11 +64,15 @@
               <button type="submit" (click)="delete(abono)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
+              </button> -->
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<div>
+  <button class="btn btn-outline-dark" (click)="back()">Volver</button>
 </div>

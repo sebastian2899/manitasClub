@@ -38,6 +38,8 @@
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.fechaFin">Fecha Fin</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.cantidad">Cantidad</span></th>
           <th scope="col"><span>Precio Membresia</span></th>
+          <th scope="col"><span>Valor Pagado</span></th>
+          <th scope="col"><span>Deuda</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.estado">Estado</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.descripcion">Descripcion</span></th>
           <th scope="col"><span jhiTranslate="manitasclubApp.membresia.tipo">Tipo</span></th>
@@ -52,6 +54,8 @@
           <td>{{ membresia.fechaFin | formatMediumDatetime }}</td>
           <td>{{ membresia.cantidad }}</td>
           <td>{{ membresia.precioMembresia }}</td>
+          <td>{{ membresia.valorPagado }}</td>
+          <td>{{ membresia.deuda }}</td>
           <td jhiTranslate="{{ 'manitasclubApp.EstadoMembresia.' + membresia.estado }}">{{ membresia.estado }}</td>
           <td>{{ membresia.descripcion }}</td>
           <td>
@@ -67,9 +71,28 @@
           <td class="text-end">
             <div class="btn-group">
               <button
+                *ngIf="membresia.deuda != 0"
+                type="submit"
+                (click)="membresiaAbonar(membresia)"
+                class="btn btn-outline-dark btn-sm ms-2"
+                data-cy="entityDetailsButton"
+              >
+                <mat-icon style="position: inherit; top: 5px" class="mat-18">savings</mat-icon>
+                <span class="d-none d-md-inline">Abonar</span>
+              </button>
+              <button
+                type="submit"
+                (click)="consultarAbonosMembresia(membresia)"
+                class="btn btn-outline-success btn-sm ms-2"
+                data-cy="entityDetailsButton"
+              >
+                <mat-icon style="position: inherit; top: 5px" class="mat-18">savings</mat-icon>
+                <span class="d-none d-md-inline">Ver abonos</span>
+              </button>
+              <button
                 type="submit"
                 [routerLink]="['/membresia', membresia.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-info btn-sm ms-2"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -79,14 +102,14 @@
               <button
                 type="submit"
                 [routerLink]="['/membresia', membresia.id, 'edit']"
-                class="btn btn-primary btn-sm"
+                class="btn btn-primary btn-sm ms-2"
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(membresia)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(membresia)" class="btn btn-danger btn-sm ms-2" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>

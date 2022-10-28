@@ -2,10 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IMembresia } from '../membresia.model';
+import { IMembresia, Membresia } from '../membresia.model';
 import { MembresiaService } from '../service/membresia.service';
 import { MembresiaDeleteDialogComponent } from '../delete/membresia-delete-dialog.component';
 import dayjs from 'dayjs/esm';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-membresia',
@@ -19,7 +20,7 @@ export class MembresiaComponent implements OnInit {
   fechaFin?: dayjs.Dayjs;
   valorTotal = 0;
 
-  constructor(protected membresiaService: MembresiaService, protected modalService: NgbModal) {}
+  constructor(protected membresiaService: MembresiaService, protected modalService: NgbModal, private router: Router) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -50,6 +51,16 @@ export class MembresiaComponent implements OnInit {
 
   opneModal(): void {
     this.modalService.open(this.content, { size: 'lg', backdrop: 'static', centered: true });
+  }
+
+  membresiaAbonar(idMembresia: IMembresia): void {
+    this.membresiaService.instaciaMembresia = idMembresia;
+    this.router.navigate(['/abono/new']);
+  }
+
+  consultarAbonosMembresia(idMembresia: IMembresia): void {
+    this.membresiaService.instaciaMembresia = idMembresia;
+    this.router.navigate(['/abono']);
   }
 
   back(): void {

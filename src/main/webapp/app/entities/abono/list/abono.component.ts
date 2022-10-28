@@ -8,6 +8,8 @@ import { ASC, DESC, ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { AbonoService } from '../service/abono.service';
 import { AbonoDeleteDialogComponent } from '../delete/abono-delete-dialog.component';
 import { ParseLinks } from 'app/core/util/parse-links.service';
+import { MembresiaService } from 'app/entities/membresia/service/membresia.service';
+import { IMembresia } from 'app/entities/membresia/membresia.model';
 
 @Component({
   selector: 'jhi-abono',
@@ -21,8 +23,14 @@ export class AbonoComponent implements OnInit {
   page: number;
   predicate: string;
   ascending: boolean;
+  membresia?: IMembresia;
 
-  constructor(protected abonoService: AbonoService, protected modalService: NgbModal, protected parseLinks: ParseLinks) {
+  constructor(
+    protected abonoService: AbonoService,
+    protected modalService: NgbModal,
+    protected parseLinks: ParseLinks,
+    private membresiaServioce: MembresiaService
+  ) {
     this.abonos = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.page = 0;
@@ -56,7 +64,7 @@ export class AbonoComponent implements OnInit {
   reset(): void {
     this.page = 0;
     this.abonos = [];
-    this.loadAll();
+    this.abonosMembresia(this.membresia!.id!);
   }
 
   loadPage(page: number): void {
@@ -65,7 +73,25 @@ export class AbonoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAll();
+    this.membresia = this.membresiaServioce.instaciaMembresia;
+    this.abonosMembresia(this.membresia.id!);
+  }
+
+  abonosMembresia(id: number): void {
+    this.isLoading = true;
+    this.abonoService.getAbonosMembresia(id).subscribe({
+      next: (res: HttpResponse<IAbono[]>) => {
+        this.isLoading = false;
+        this.paginateAbonos(res.body, res.headers);
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  back(): void {
+    window.history.back();
   }
 
   trackId(_index: number, item: IAbono): number {

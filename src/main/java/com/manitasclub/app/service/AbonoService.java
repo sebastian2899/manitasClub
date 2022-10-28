@@ -1,9 +1,11 @@
 package com.manitasclub.app.service;
 
 import com.manitasclub.app.service.dto.AbonoDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service Interface for managing {@link com.manitasclub.app.domain.Abono}.
@@ -40,6 +42,9 @@ public interface AbonoService {
      * @return the list of entities.
      */
     Page<AbonoDTO> findAll(Pageable pageable);
+
+    @Transactional
+    List<AbonoDTO> findAllByMembresia(Long idMembresia);
 
     /**
      * Get the "id" abono.

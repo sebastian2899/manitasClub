@@ -4,4 +4,6 @@ export enum EstadoMembresia {
   ACTIVA = 'ACTIVA',
 
   CANCELADA = 'CANCELADA',
+
+  DEUDA = 'DEUDA',
 }

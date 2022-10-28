@@ -1,5 +1,6 @@
 package com.manitasclub.app.service.impl;
 
+import com.manitasclub.app.domain.Abono;
 import com.manitasclub.app.domain.Membresia;
 import com.manitasclub.app.domain.Ninio;
 import com.manitasclub.app.domain.TipoMembresia;
@@ -62,10 +63,16 @@ public class MembresiaServiceImpl implements MembresiaService {
         log.debug("Request to save Membresia : {}", membresiaDTO);
         Long idNinio = membresiaDTO.getIdNinio();
         Long idTipo = membresiaDTO.getIdTipo();
+        BigDecimal deuda = membresiaDTO.getDeuda() != null ? membresiaDTO.getDeuda() : BigDecimal.ZERO;
+        BigDecimal valorPagado = membresiaDTO.getValorPagado() != null ? membresiaDTO.getValorPagado() : BigDecimal.ZERO;
         Membresia membresia = membresiaMapper.toEntity(membresiaDTO);
         membresia.setIdNinio(idNinio);
         membresia.setIdTipo(idTipo);
+        membresia.setDeuda(deuda);
+        membresia.setValorPagado(valorPagado);
+
         membresia = membresiaRepository.save(membresia);
+
         return membresiaMapper.toDto(membresia);
     }
 
@@ -97,6 +104,7 @@ public class MembresiaServiceImpl implements MembresiaService {
         List<Membresia> membresias = membresiaRepository
             .findAll()
             .stream()
+            .filter(element -> element.getFechaFin() != null)
             .filter(element -> element.getFechaFin().isBefore(Instant.now()))
             .collect(Collectors.toCollection(LinkedList::new));
 
@@ -120,7 +128,7 @@ public class MembresiaServiceImpl implements MembresiaService {
 
         Query q = entityManager
             .createQuery(
-                "SELECT SUM(e.precioMembresia) FROM Membresia e WHERE TO_CHAR(e.fechaCreacion, 'yyyy-MM-dd') " +
+                "SELECT SUM(e.valorPagado) FROM Membresia e WHERE TO_CHAR(e.fechaCreacion, 'yyyy-MM-dd') " +
                 "BETWEEN :fechaInicio AND :fechaFin"
             )
             .setParameter("fechaInicio", fechaInicioFormat)
@@ -132,7 +140,19 @@ public class MembresiaServiceImpl implements MembresiaService {
             value = BigDecimal.ZERO;
         }
 
-        return value;
+        Query q2 = entityManager
+            .createQuery(
+                "SELECT SUM(a.valorAbono) FROM Abono a WHERE TO_CHAR(a.fechaAbono, 'yyyy-MM-dd') " + "BETWEEN :fechaInicio AND :fechaFin"
+            )
+            .setParameter("fechaInicio", fechaInicioFormat)
+            .setParameter("fechaFin", fechaFinFormat);
+
+        BigDecimal value2 = (BigDecimal) q2.getSingleResult();
+        if (null == value2) {
+            value2 = BigDecimal.ZERO;
+        }
+
+        return value.add(value2);
     }
 
     private Ninio consultarNinio(Long idNinio) {

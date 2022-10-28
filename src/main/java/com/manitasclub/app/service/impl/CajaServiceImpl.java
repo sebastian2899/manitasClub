@@ -78,7 +78,7 @@ public class CajaServiceImpl implements CajaService {
         String fecha = Instant.now().toString().substring(0, 10);
 
         Query q = entityManager
-            .createNativeQuery("SELECT SUM(m.precio_membresia) FROM membresia AS m WHERE TO_CHAR(m.fecha_creacion, 'yyyy-MM-dd') = :fecha")
+            .createNativeQuery("SELECT SUM(m.valor_pagado) FROM membresia AS m WHERE TO_CHAR(m.fecha_creacion, 'yyyy-MM-dd') = :fecha")
             .setParameter("fecha", fecha);
         BigDecimal valueMembresia = (BigDecimal) q.getSingleResult();
         if (valueMembresia == null) {
@@ -93,7 +93,15 @@ public class CajaServiceImpl implements CajaService {
             valueRegistroDiario = BigDecimal.ZERO;
         }
 
-        return valueMembresia.add(valueRegistroDiario);
+        Query q3 = entityManager
+            .createNativeQuery("SELECT SUM(valor_abono) FROM abono WHERE TO_CHAR(fecha_abono, 'yyyy-MM-dd') = :fecha")
+            .setParameter("fecha", fecha);
+        BigDecimal valueAbono = (BigDecimal) q3.getSingleResult();
+        if (valueAbono == null) {
+            valueAbono = BigDecimal.ZERO;
+        }
+
+        return valueMembresia.add(valueRegistroDiario).add(valueAbono);
     }
 
     @Override

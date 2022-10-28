@@ -15,10 +15,19 @@ export type NumberResponseType = HttpResponse<number>;
 
 @Injectable({ providedIn: 'root' })
 export class MembresiaService {
+  protected _membresia?: IMembresia | null;
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/membresias');
   protected ValuePerDatesUrl = this.applicationConfigService.getEndpointFor('api/membresias/consultarValorMes');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+
+  public set instaciaMembresia(membresia: IMembresia) {
+    this._membresia = membresia;
+  }
+
+  public get instaciaMembresia(): IMembresia {
+    return this._membresia!;
+  }
 
   create(membresia: IMembresia): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(membresia);

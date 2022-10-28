@@ -42,6 +42,8 @@ export class MembresiaUpdateComponent implements OnInit {
     precioMembresia: [],
     idNinio: [],
     idTipo: [],
+    valorPagado: [],
+    deuda: [],
   });
 
   constructor(
@@ -110,6 +112,17 @@ export class MembresiaUpdateComponent implements OnInit {
     if (cantidad) {
       this.editForm.get(['precioMembresia'])!.setValue(Number(this.tipSeleccionado!.valorMembresia) * Number(cantidad));
     }
+
+    const valorPagado = this.editForm.get(['valorPagado'])!.value;
+    const precioMembresia = this.editForm.get(['precioMembresia'])!.value;
+
+    this.editForm.get(['deuda'])!.setValue(Number(precioMembresia) - Number(valorPagado));
+
+    this.editForm.get(['deuda'])!.valueChanges.subscribe(res => {
+      res === 0
+        ? this.editForm.get(['estado'])!.setValue(EstadoMembresia.ACTIVA)
+        : this.editForm.get(['estado'])!.setValue(EstadoMembresia.DEUDA);
+    });
   }
 
   previousState(): void {
@@ -165,8 +178,10 @@ export class MembresiaUpdateComponent implements OnInit {
       tipo: membresia.tipo,
       ninio: membresia.ninio,
       precioMembresia: membresia.precioMembresia,
-      idNinio: membresia.ninio?.id,
-      idTipo: membresia.tipo?.id,
+      idNinio: membresia.idNinio,
+      idTipo: membresia.idTipo,
+      valorPagado: membresia.valorPagado,
+      deuda: membresia.deuda,
     });
 
     this.tiposCollection = this.tipoMembresiaService.addTipoMembresiaToCollectionIfMissing(this.tiposCollection, membresia.tipo);
@@ -202,6 +217,8 @@ export class MembresiaUpdateComponent implements OnInit {
       precioMembresia: this.editForm.get(['precioMembresia'])!.value,
       idNinio: this.editForm.get(['idNinio'])!.value,
       idTipo: this.editForm.get(['idTipo'])!.value,
+      valorPagado: this.editForm.get(['valorPagado'])!.value,
+      deuda: this.editForm.get(['deuda'])!.value,
     };
   }
 }

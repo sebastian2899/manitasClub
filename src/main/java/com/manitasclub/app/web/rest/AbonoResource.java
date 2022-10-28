@@ -100,6 +100,13 @@ public class AbonoResource {
             .body(result);
     }
 
+    @GetMapping("/abonosMembresia/{id}")
+    public ResponseEntity<List<AbonoDTO>> getAbonosMembresia(@PathVariable Long id) {
+        log.debug("REST request to get a page of Abonos");
+        List<AbonoDTO> list = abonoService.findAllByMembresia(id);
+        return ResponseEntity.ok().body(list);
+    }
+
     /**
      * {@code PATCH  /abonos/:id} : Partial updates given fields of an existing abono, field will ignore if it is null
      *

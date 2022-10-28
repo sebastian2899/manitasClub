@@ -59,6 +59,12 @@ public class Membresia implements Serializable {
         return precioMembresia;
     }
 
+    @Column(name = "deuda")
+    public BigDecimal deuda;
+
+    @Column(name = "valor_pagado")
+    public BigDecimal valorPagado;
+
     public void setPrecioMembresia(BigDecimal precioMembresia) {
         this.precioMembresia = precioMembresia;
     }
@@ -89,6 +95,22 @@ public class Membresia implements Serializable {
     public Membresia id(Long id) {
         this.setId(id);
         return this;
+    }
+
+    public BigDecimal getDeuda() {
+        return deuda;
+    }
+
+    public void setDeuda(BigDecimal deuda) {
+        this.deuda = deuda;
+    }
+
+    public BigDecimal getValorPagado() {
+        return valorPagado;
+    }
+
+    public void setValorPagado(BigDecimal valorPagado) {
+        this.valorPagado = valorPagado;
     }
 
     public Long getIdNinio() {

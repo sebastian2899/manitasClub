@@ -1,3 +1,5 @@
+import { MembresiaService } from './../../membresia/service/membresia.service';
+import { IMembresia } from './../../membresia/membresia.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
@@ -17,7 +19,7 @@ import { AbonoService } from '../service/abono.service';
 })
 export class AbonoUpdateComponent implements OnInit {
   isSaving = false;
-
+  membresia?: IMembresia | null;
   editForm = this.fb.group({
     id: [],
     idMembresia: [],
@@ -25,7 +27,12 @@ export class AbonoUpdateComponent implements OnInit {
     valorAbono: [],
   });
 
-  constructor(protected abonoService: AbonoService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected abonoService: AbonoService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder,
+    private membresiaService: MembresiaService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ abono }) => {
@@ -36,6 +43,8 @@ export class AbonoUpdateComponent implements OnInit {
 
       this.updateForm(abono);
     });
+    this.membresia = this.membresiaService.instaciaMembresia;
+    this.editForm.get(['idMembresia'])!.setValue(this.membresia.id);
   }
 
   previousState(): void {
@@ -84,7 +93,7 @@ export class AbonoUpdateComponent implements OnInit {
     return {
       ...new Abono(),
       id: this.editForm.get(['id'])!.value,
-      idMembresia: this.editForm.get(['idMembresia'])!.value,
+      idMembresia: this.membresia!.id,
       fechaAbono: this.editForm.get(['fechaAbono'])!.value ? dayjs(this.editForm.get(['fechaAbono'])!.value, DATE_TIME_FORMAT) : undefined,
       valorAbono: this.editForm.get(['valorAbono'])!.value,
     };

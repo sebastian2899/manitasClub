@@ -5,9 +5,10 @@ import { MembresiaDetailComponent } from './detail/membresia-detail.component';
 import { MembresiaUpdateComponent } from './update/membresia-update.component';
 import { MembresiaDeleteDialogComponent } from './delete/membresia-delete-dialog.component';
 import { MembresiaRoutingModule } from './route/membresia-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  imports: [SharedModule, MembresiaRoutingModule],
+  imports: [SharedModule, MembresiaRoutingModule, MatIconModule],
   declarations: [MembresiaComponent, MembresiaDetailComponent, MembresiaUpdateComponent, MembresiaDeleteDialogComponent],
   entryComponents: [MembresiaDeleteDialogComponent],
 })

@@ -4,7 +4,8 @@
       "null": "",
       "VENCIDA": "VENCIDA",
       "ACTIVA": "ACTIVA",
-      "CANCELADA": "CANCELADA"
+      "CANCELADA": "CANCELADA",
+      "DEUDA": "DEUDA"
     }
   }
 }

@@ -47,6 +47,12 @@
              <column name="precio_membresia" type="decimal(21,2)">
                 <constraints nullable="true"/>
             </column>
+            <column name="deuda" type="decimal(21,2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="valor_pagado" type="decimal(21,2)">
+                <constraints nullable="true"/>
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="membresia" columnName="fecha_creacion" columnDataType="${datetimeType}"/>

@@ -93,6 +93,26 @@
         </div>
 
         <div class="col-md-6">
+          <label class="form-label" for="field_descripcion">Valor Pagado</label>
+          <input
+            (keyup)="calcularPrecioMembresia()"
+            type="number"
+            class="form-control"
+            name="valorPagado"
+            id="field_valorPagado"
+            data-cy="valorPagado"
+            formControlName="valorPagado"
+          />
+        </div>
+      </div>
+
+      <div *ngIf="this.editForm.get(['idTipo'])!.value && this.editForm.get(['cantidad'])!.value" class="row">
+        <div class="col-md-6">
+          <label class="form-label" for="field_descripcion">Deuda</label>
+          <input type="number" class="form-control" name="deuda" id="field_deuda" data-cy="deuda" formControlName="deuda" readonly />
+        </div>
+
+        <div class="col-md-6">
           <label class="form-label" jhiTranslate="manitasclubApp.membresia.estado" for="field_estado">Estado</label>
           <select class="form-control" name="estado" formControlName="estado" id="field_estado" data-cy="estado" readonly>
             <option [ngValue]="null">{{ 'manitasclubApp.EstadoMembresia.null' | translate }}</option>

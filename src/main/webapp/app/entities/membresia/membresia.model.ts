@@ -16,6 +16,8 @@ export interface IMembresia {
   precioMembresia?: number | null;
   idTipo?: number | null;
   idNinio?: number | null;
+  deuda?: number | null;
+  valorPagado?: number | null;
 }
 
 export class Membresia implements IMembresia {
@@ -31,7 +33,9 @@ export class Membresia implements IMembresia {
     public ninio?: INinio | null,
     public precioMembresia?: number | null,
     public idTipo?: number | null,
-    public idNinio?: number | null
+    public idNinio?: number | null,
+    public deuda?: number | null,
+    public valorPagado?: number | null
   ) {}
 }
 
