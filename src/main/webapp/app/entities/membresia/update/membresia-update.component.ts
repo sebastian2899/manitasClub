@@ -112,7 +112,9 @@ export class MembresiaUpdateComponent implements OnInit {
     if (cantidad) {
       this.editForm.get(['precioMembresia'])!.setValue(Number(this.tipSeleccionado!.valorMembresia) * Number(cantidad));
     }
+  }
 
+  calcularDeuda(): void {
     const valorPagado = this.editForm.get(['valorPagado'])!.value;
     const precioMembresia = this.editForm.get(['precioMembresia'])!.value;
 

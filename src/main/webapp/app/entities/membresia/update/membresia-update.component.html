@@ -87,7 +87,6 @@
             name="precioMembresia"
             id="field_precioMembresia"
             data-cy="precioMembresia"
-            readonly
             formControlName="precioMembresia"
           />
         </div>
@@ -95,7 +94,7 @@
         <div class="col-md-6">
           <label class="form-label" for="field_descripcion">Valor Pagado</label>
           <input
-            (keyup)="calcularPrecioMembresia()"
+            (keyup)="calcularDeuda()"
             type="number"
             class="form-control"
             name="valorPagado"
